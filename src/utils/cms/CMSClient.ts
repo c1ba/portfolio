@@ -1,0 +1,216 @@
+import {
+  ApolloClient,
+  DocumentNode,
+  HttpLink,
+  InMemoryCache,
+  TypedDocumentNode,
+} from '@apollo/client';
+import {SetContextLink} from '@apollo/client/link/context';
+import {TemplateURLs} from './types';
+import {SITE_URLS} from './queries';
+import {OperationVariables} from '@apollo/client';
+import {createFragmentRegistry} from '@apollo/client/cache';
+import {fragment as HERO} from '@/components/Hero/query';
+import {THUMBNAIL} from './fragments';
+import {fragment as INNER_ABOUT_PAGE} from '@/templates/AboutPage/query';
+import {getRecursivePaths, PROJECT_PATH} from '../fileUtils';
+
+type PageData = {url: string; pageType: string};
+
+type ApolloQueryOptions = {
+  host: string;
+  authToken: string | undefined;
+  headers?: {
+    [key: string]: string;
+  };
+  miscellanious?: {
+    fragments?: DocumentNode[];
+  };
+};
+
+class CMSClient {
+  private client: ApolloClient;
+
+  constructor(options: ApolloQueryOptions) {
+    if (!options.host || !options.authToken) {
+      throw new Error(
+        `[CMSClient] Please make sure that Host or Authentication Token are properly set.`,
+      );
+    }
+    const httpConfig = new SetContextLink(() => {
+      const token = options.authToken;
+      return {
+        headers: {
+          Authorization: token ? `Bearer ${token}` : null,
+          ...options.headers,
+        },
+      };
+    });
+
+    const client = new ApolloClient({
+      link: httpConfig.concat(new HttpLink({uri: options.host})),
+      cache: new InMemoryCache(),
+    });
+    this.client = client;
+    console.log(options.miscellanious?.fragments);
+
+    // TODO: Make a function to read programmatically all declared fragments throughout the code
+    const fragmentsRegistry = createFragmentRegistry(
+      ...(options.miscellanious?.fragments || []),
+      // THUMBNAIL,
+      // HERO,
+      // INNER_ABOUT_PAGE,
+    );
+
+    const cacheWithDeclaredFragments = new InMemoryCache({
+      fragments: fragmentsRegistry,
+    });
+    this.client.cache = cacheWithDeclaredFragments;
+  }
+
+  static async readFragments(targetFiles?: string[]) {
+    const paths = getRecursivePaths(
+      PROJECT_PATH,
+      targetFiles || ['query.ts', 'fragments.ts'],
+    );
+    // paths.forEach(async (path) => {
+    //     const windowsPath = path.replaceAll('/', '\\');
+    //     // const content = readFileSync(path, {encoding: 'utf-8'});
+    //     // console.log(content);
+    //     // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    //     // eval(`import('file://${windowsPath}')`).then((imported: any) => console.log(imported));
+
+    //     const code = await import(/* webpackIgnore: true */`file://${windowsPath}`);
+    //     // console.log(code);
+    //     Object.entries(code).forEach(([variableName, value]) => {
+    //         // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    //         const {kind, definitions, loc} = value as any;
+    //         if (kind !== 'Document') {
+    //             return;
+    //         }
+
+    //         if (definitions[0].kind !== 'FragmentDefinition') {
+    //             return;
+    //         }
+    //         // For sure there's a better way to use the value rather than recreating the gql. Look into it later.
+    // const {source} = loc;
+    // const {body} = source;
+    // const gqlFragment = gql`${body}`;
+
+    //         // // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    //         // fragments.push(gqlFragment);
+    //         fragments.push(value as DocumentNode);
+    //     });
+    //     console.log(path, fragments);
+    // });
+    const overallFragments: DocumentNode[] = [];
+    const promises = paths.map(async (path) => {
+      // TODO: Make this work for other OSes as well
+      const windowsPath = path.replaceAll('/', '\\');
+
+      const code = await import(
+        /* webpackIgnore: true */ `file://${windowsPath}`
+      );
+      const fragments: DocumentNode[] = Object.values(code).filter((value) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const {kind, definitions} = value as any;
+        if (kind !== 'Document') {
+          return false;
+        }
+
+        return definitions[0].kind === 'FragmentDefinition';
+      }) as DocumentNode[];
+
+      overallFragments.push(...fragments);
+      return fragments;
+    });
+    await Promise.all(promises);
+    return overallFragments;
+  }
+
+  async querySitewideURLs() {
+    try {
+      const {data, error} = await this.client.query<TemplateURLs>({
+        query: SITE_URLS,
+      });
+
+      if (error) {
+        throw new Error(`[${error.name}]: ${error.message}`);
+      }
+
+      if (!data) {
+        return [];
+      }
+      const urls: PageData[] = [];
+
+      Object.values(data).forEach((cmsData) => {
+        const slugs = cmsData
+          .filter(({DisablePageGeneration}) => !DisablePageGeneration)
+          .map(({URL, __typename}) => ({
+            url: URL,
+            pageType: `${__typename.toLowerCase()[0]}${__typename.substring(1)}`,
+          }));
+
+        urls.push(...slugs);
+      });
+
+      return urls;
+    } catch (err) {
+      console.error('[CMSClient] Error when querying sitewide URLs: ', err);
+      return [];
+    }
+  }
+
+  async querySinglePageProps<T>(
+    query: DocumentNode | TypedDocumentNode<T, OperationVariables>,
+  ) {
+    try {
+      const {data, error} = await this.client.query<T>({
+        query,
+      });
+
+      if (error) {
+        throw new Error(`[${error.name}]: ${error.message}`);
+      }
+
+      return {
+        props: {
+          data,
+        },
+      };
+    } catch (err) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      console.error('[CMSClient] Error when querying single page props: ', err);
+      return {props: {data: null}};
+    }
+  }
+
+  async queryByURL<T>(
+    url: string,
+    query: DocumentNode | TypedDocumentNode<T, OperationVariables>,
+  ) {
+    try {
+      const {data, error} = await this.client.query<T>({
+        query,
+        variables: {
+          filters: {
+            URL: {
+              eq: url,
+            },
+          },
+        },
+      });
+
+      if (error) {
+        throw new Error(`[${error.name}]: ${error.message}`);
+      }
+
+      return data;
+    } catch (err) {
+      console.error('[CMSClient] Error when querying single page props: ', err);
+      return null;
+    }
+  }
+}
+
+export default CMSClient;
