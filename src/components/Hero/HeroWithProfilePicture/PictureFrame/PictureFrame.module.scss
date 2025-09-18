@@ -1,0 +1,37 @@
+@use '../../../../app/styles/' as *;
+
+.pictureFrame {
+  transform: rotate(22deg);
+  transform-origin: center top;
+  clip-path: shape(
+    from 54px 0,
+    line by 147px 0,
+    line by 0 210px,
+    line by -209px 0,
+    line by 0 -148px,
+    close
+  );
+  animation: utza-utza 5s ease-in-out infinite;
+}
+
+.triangleBottomRight {
+  width: 0;
+  height: 0;
+  border-bottom: 50px solid #ffffff;
+  border-left: 50px solid transparent;
+  position: absolute;
+}
+
+@keyframes utza-utza {
+  25% {
+    transform: rotate(22deg);
+  }
+
+  75% {
+    transform: rotate(-22deg);
+  }
+
+  100% {
+    transform: rotate(22deg);
+  }
+}

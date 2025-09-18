@@ -1,15 +1,5 @@
-import {Geist, Geist_Mono} from 'next/font/google';
-import '@/styles/globals.scss';
-
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-});
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-});
+import '@/app/styles/globals.scss';
+import GridContainer from '../Grid/GridContainer';
 
 const Layout = ({
   children,
@@ -18,8 +8,10 @@ const Layout = ({
 }>) => {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        {children}
+      <body>
+        <main>
+          <GridContainer>{children}</GridContainer>
+        </main>
       </body>
     </html>
   );

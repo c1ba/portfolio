@@ -1,0 +1,49 @@
+@use '../../../app/styles/' as *;
+
+.grid {
+  grid-column: 1 / -1;
+}
+
+@for $i from 1 through $mobile-columns {
+  .mobile-span-#{$i} {
+    grid-column: #{1} / $i;
+  }
+
+  .mobile-symmetric-span-#{$i} {
+    grid-column: -#{$i} / $i;
+  }
+}
+
+@include media-query-tablet-portrait {
+  @for $i from 1 through $tablet-portrait-columns {
+    .tablet-portrait-span-#{$i} {
+      grid-column: #{1} / $i;
+    }
+
+    .tablet-portrait-symmetric-span-#{$i} {
+      grid-column: -#{$i} / $i;
+    }
+  }
+}
+@include media-query-tablet-landscape {
+  @for $i from 1 through $tablet-landscape-columns {
+    .tablet-landscape-span-#{$i} {
+      grid-column: #{1} / $i;
+    }
+
+    .tablet-landscape-symmetric-span-#{$i} {
+      grid-column: -#{$i} / $i;
+    }
+  }
+}
+@include media-query-desktop {
+  @for $i from 1 through $desktop-columns {
+    .desktop-span-#{$i} {
+      grid-column: #{1} / $i;
+    }
+
+    .desktop-symmetric-span-#{$i} {
+      grid-column: -#{$i} / $i;
+    }
+  }
+}

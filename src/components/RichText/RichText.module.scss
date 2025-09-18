@@ -1,0 +1,7 @@
+@use '../../app/styles/' as *;
+
+.richText {
+  @include media-query-mobile {
+    padding: 0 25px;
+  }
+}

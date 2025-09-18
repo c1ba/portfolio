@@ -27,3 +27,8 @@ export type StrapiInnerPages = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key in StrapiInnerPageKey]: any;
 }[];
+
+export type StrapiFlexibleContent = {
+  __typename: string;
+  [key: string]: unknown;
+}[];

@@ -52,7 +52,7 @@ class CMSClient {
       cache: new InMemoryCache(),
     });
     this.client = client;
-    console.log(options.miscellanious?.fragments);
+    // console.log(options.miscellanious?.fragments);
 
     // TODO: Make a function to read programmatically all declared fragments throughout the code
     const fragmentsRegistry = createFragmentRegistry(

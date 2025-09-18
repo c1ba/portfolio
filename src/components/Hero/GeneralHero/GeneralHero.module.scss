@@ -1,0 +1,23 @@
+@use '../../../app/styles/' as *;
+
+.heroContentGrid {
+  min-height: 392px;
+  display: flex;
+  align-items: center;
+  transition: min-height 0.5s ease-in-out;
+
+  @include media-query-mobile {
+    justify-content: center;
+  }
+}
+
+.whiteBackground {
+  background-color: #ffffff;
+  color: #000000;
+  margin: 0px calc(50% - 50vw);
+
+  @include theme-light {
+    color: #ffffff;
+    background-color: #001517;
+  }
+}

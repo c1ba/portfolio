@@ -1,47 +1,44 @@
-import { gql } from "@apollo/client";
+import {gql} from '@apollo/client';
 
 export const fragment = gql`
-fragment StrapiAboutPage on AboutPage {
+  fragment StrapiAboutPage on AboutPage {
     Hero {
-    ...StrapiHero
-}
-FlexibleContent {
-    ... on ComponentGeneralRichText {
+      ...StrapiHero
+    }
+    FlexibleContent {
+      ... on ComponentGeneralRichText {
         HtmlId
         Content
-    }
-    ... on ComponentGeneralCinematicCarousel {
+      }
+      ... on ComponentGeneralCinematicCarousel {
         Cards {
-            Title
+          Title
+          URL
+          cta {
+            Label
+            ScreenreaderText
+            Type
             URL
-            cta {
-                Label
-                ScreenreaderText
-                Type
-                URL
-            }
-            BackgroundImage {
-                alternativeText
-                width
-                height
-                url
-            }
+          }
+          BackgroundImage {
+            alternativeText
+            width
+            height
+            url
+          }
         }
+      }
+      ...RichText
     }
-    ... on ComponentGeneralRichText {
-            HtmlId
-            Content
-    }
-}
-}
+  }
 `;
 
 const query = gql`
-    query AboutPages($filters: AboutPageFiltersInput) {
-        aboutPages(filters: $filters) {
-            ...StrapiAboutPage
-        }
+  query AboutPages($filters: AboutPageFiltersInput) {
+    aboutPages(filters: $filters) {
+      ...StrapiAboutPage
     }
+  }
 `;
 
 export default query;

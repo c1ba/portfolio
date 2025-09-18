@@ -1,19 +1,21 @@
-import HeroWithProfilePicture from "@/components/Hero/HeroWithProfilePicture";
-import { processStrapiHeroWithProfilePicture } from "@/utils/cms/processors";
-import { StrapiHero } from "@/utils/cms/types";
+import HeroWithProfilePicture from '@/components/Hero/HeroWithProfilePicture';
+import mapBlocks from '@/helpers/blocks';
+import {processStrapiHeroWithProfilePicture} from '@/utils/cms/processors';
+import {StrapiFlexibleContent, StrapiHero} from '@/utils/cms/types';
 
 type PageProps = {
-    Hero: StrapiHero | [StrapiHero];
+  Hero: StrapiHero | [StrapiHero];
+  FlexibleContent: StrapiFlexibleContent;
 };
 
 const AboutPage = ({data}: {data: PageProps}) => {
-    console.log(data);
-    const {Hero} = data;
-    return (
-        <>
-            <HeroWithProfilePicture {...processStrapiHeroWithProfilePicture(Hero)} />
-        </>
-    );
+  const {Hero, FlexibleContent} = data;
+  return (
+    <>
+      <HeroWithProfilePicture {...processStrapiHeroWithProfilePicture(Hero)} />
+      {mapBlocks(FlexibleContent)}
+    </>
+  );
 };
 
 export default AboutPage;

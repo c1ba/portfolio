@@ -11,8 +11,7 @@ export async function getStaticProps() {
 }
 
 const Page = ({data}: {data: StrapiHomePage | null}) => {
-  console.log(data);
-  if (!!!data) {
+  if (!data) {
     notFound();
   }
 

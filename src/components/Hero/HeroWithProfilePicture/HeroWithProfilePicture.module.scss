@@ -1,0 +1,16 @@
+@use '../../../app/styles/' as *;
+
+.heroContainer {
+  margin: 64px 0;
+}
+
+.headingContainer {
+  display: flex;
+  justify-content: space-between;
+
+  @include media-query-mobile {
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+  }
+}

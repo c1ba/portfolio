@@ -1,0 +1,21 @@
+@use '../../../app/styles/' as *;
+
+.container {
+  display: grid;
+
+  @include media-query-mobile {
+    grid-template-columns: repeat($mobile-columns, 1fr);
+  }
+
+  @include media-query-tablet-portrait {
+    grid-template-columns: repeat($tablet-portrait-columns, 1fr);
+  }
+
+  @include media-query-tablet-landscape {
+    grid-template-columns: repeat($tablet-landscape-columns, 1fr);
+  }
+
+  @include media-query-desktop {
+    grid-template-columns: repeat($desktop-columns, 1fr);
+  }
+}

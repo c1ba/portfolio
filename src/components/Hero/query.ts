@@ -8,5 +8,6 @@ export const fragment = gql`
       ...StrapiThumbnail
     }
     IsProfilePicture
+    EnableWhiteBackground
   }
 `;
