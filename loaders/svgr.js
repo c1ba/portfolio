@@ -41,7 +41,7 @@ module.exports = function (source) {
 
             // Take the opening svg tag, where the closing arrow is a capturing group and process it.
             // Then replace the original tag with the processed one.
-            const svgTag = svgContent.match(/(?:<svg(.|\n)+?)(>)/);
+            const svgTag = svgContent.match(/(?:<svg(?:.|\n)+?)(>)/);
             const processedSvgTag = svgTag[0].replace(svgTag[1], '{...props}>');
             const processedSvgContent = svgContent.replace(
               svgTag[0],
