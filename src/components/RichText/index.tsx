@@ -1,7 +1,6 @@
 import {ColumnSpan} from '@/app/styles/types';
-import GridItem from '../Grid/GridItem';
-import GridContainer from '../Grid/GridContainer';
 import styles from './RichText.module.scss';
+import HtmlSanitizer from '@/helpers/HtmlSanitizer';
 
 type RichTextProps = {
   id?: string;
@@ -13,13 +12,13 @@ type RichTextProps = {
 
 const RichText = ({id, content, className, ...props}: RichTextProps) => {
   const classNames = [styles.richText, className].filter(Boolean).join(' ');
+  const sanitizedHtml = new HtmlSanitizer(content).getHtml();
 
-  // TODO: Add HTML sanitizer
   return (
     <div
       className={classNames}
       id={id}
-      dangerouslySetInnerHTML={{__html: content}}
+      dangerouslySetInnerHTML={{__html: sanitizedHtml}}
       {...props}
     />
   );
