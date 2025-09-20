@@ -37,8 +37,6 @@ const WHITESPACE_CHARACTERS = {
 
 class HtmlSanitizer {
   private html: string;
-  // Get all tags in html string by getting all the closing tags then Set them to remove duplicates
-  // (<\/(?:.+)>)
 
   constructor(
     html: string,
@@ -77,6 +75,8 @@ class HtmlSanitizer {
     return parsedHtml;
   }
 
+  // Search all tags in the HTML snippet by closing tags.
+  // Get rid of duplicates and excepted tags.
   private static getRemovableTags(html: string, exceptedTags: HTMLTag[] = []) {
     const closingTags = Array.from(
       new Set([...html.matchAll(/(?:<\/(.+)>)/gi)]),
