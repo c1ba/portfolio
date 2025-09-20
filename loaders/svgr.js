@@ -1,14 +1,17 @@
 const fs = require('fs');
 
 module.exports = function (source) {
+  // Get all the SVG import declarations. If none found, return source as is.
   const svgRegex = /(import \w+ from ('|").*.svg('|"))/gi;
   const matches = source.match(svgRegex);
+
   if (!matches) {
     return source;
   }
-  const callback = this.async();
 
+  const callback = this.async();
   try {
+    // Create promises for converting the SVGs into React Components.
     const reactSvgs = matches.map((importDeclaration) => {
       const pathRegex = /(('|").*.svg('|"))/i;
       const path = importDeclaration.match(pathRegex)?.[0];
@@ -24,7 +27,9 @@ module.exports = function (source) {
           }
           try {
             const svgContent = fs.readFileSync(result, 'utf-8');
-            // Taking 1st capturing group a.k.a the name of the import;
+
+            // Taking 1st capturing group a.k.a the name of the import.
+            // import SomeSVG from 'svg/path'; => SomeSVG
             const componentName =
               importDeclaration.match(/(?:import )(\w+)/)[1];
             if (!componentName) {
@@ -34,11 +39,10 @@ module.exports = function (source) {
               return;
             }
 
-            // TODO: refactor regex to include cases like endlines and tabs instead of space
-            const svgTag = svgContent.match(/(?:<svg.*)(>)/);
-            // Take the match and the first capture group aka closing arrow and add destructured props
+            // Take the opening svg tag, where the closing arrow is a capturing group and process it.
+            // Then replace the original tag with the processed one.
+            const svgTag = svgContent.match(/(?:<svg(.|\n)+?)(>)/);
             const processedSvgTag = svgTag[0].replace(svgTag[1], '{...props}>');
-            // Take the match and replace it with the processed SVG tag
             const processedSvgContent = svgContent.replace(
               svgTag[0],
               processedSvgTag,
@@ -46,7 +50,7 @@ module.exports = function (source) {
 
             // Export as React component
             const code = `
-            import { SVGProps } from "react"
+            import { SVGProps } from "react";
             const ${componentName} = (props: SVGProps<SVGSVGElement>) => {
                 return ${processedSvgContent};
             };
@@ -61,14 +65,17 @@ module.exports = function (source) {
       });
     });
 
-    Promise.all(reactSvgs).then((svgs) => {
-      const newSource = svgs.join(' ') + source;
-      // console.log(svgs.join(' ') + source);
-      callback(null, newSource);
-    });
-    //   console.log(reactComponents);
-    //   console.log(reactComponents.join(' ') + source);
-    //   return reactComponents.join(' ') + source; // Return the transformed code
+    // Add all the SVGs to the source. If the process fails, return the original source
+    Promise.all(reactSvgs)
+      .then((svgs) => {
+        const newSource = svgs.join(' ') + source;
+        callback(null, newSource);
+      })
+      .catch((err) => {
+        console.error(err);
+        callback(null, source);
+      });
+    //   return source; // Return the transformed code
   } catch (err) {
     console.error(err);
     return source;
