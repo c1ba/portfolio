@@ -1,5 +1,7 @@
 import '@/app/styles/globals.scss';
 import GridContainer from '../Grid/GridContainer';
+import BackgroundPattern from '../BackgroundPattern';
+import styles from './Layout.module.scss';
 
 const Layout = ({
   children,
@@ -10,8 +12,11 @@ const Layout = ({
     <html lang="en">
       <body>
         <main>
-          <GridContainer>{children}</GridContainer>
+          <GridContainer className={styles.mainGridContainer}>
+            {children}
+          </GridContainer>
         </main>
+        <BackgroundPattern />
       </body>
     </html>
   );

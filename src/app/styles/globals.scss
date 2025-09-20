@@ -26,6 +26,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+main {
+  z-index: 1;
+  position: absolute;
+}
+
 * {
   box-sizing: border-box;
   padding: 0;

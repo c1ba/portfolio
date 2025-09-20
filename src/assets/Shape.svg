@@ -1,24 +1,15 @@
-<svg width="1039" height="2499" viewBox="0 0 1039 2499" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g filter="url(#filter0_fn_18_2)">
-<path d="M1044 461.5C1071.83 448.554 1106.09 447.964 1047.34 533.4L1122 2141.5C1098.67 2110.67 1011 2031.5 847 1961.5C642 1874 448.5 1783.5 455 1597.5C461.5 1411.5 541 1254 705 1119.5C869 985 781.5 969.5 819 818C856.5 666.5 906.5 718 1022 568C1031.9 555.143 1040.29 543.652 1047.34 533.4L1044 461.5Z" fill="#58C4DC"/>
-</g>
-<defs>
-<filter id="filter0_fn_18_2" x="0.140686" y="0.447021" width="1576.56" height="2595.75" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-<feFlood flood-opacity="0" result="BackgroundImageFix"/>
-<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
-<feGaussianBlur stdDeviation="227.35" result="effect1_foregroundBlur_18_2"/>
-<feTurbulence type="fractalNoise" baseFrequency="2 2" stitchTiles="stitch" numOctaves="3" result="noise" seed="2481" />
-<feColorMatrix in="noise" type="luminanceToAlpha" result="alphaNoise" />
-<feComponentTransfer in="alphaNoise" result="coloredNoise1">
-<feFuncA type="discrete" tableValues="1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 "/>
-</feComponentTransfer>
-<feComposite operator="in" in2="effect1_foregroundBlur_18_2" in="coloredNoise1" result="noise1Clipped" />
-<feFlood flood-color="rgba(0, 0, 0, 0.25)" result="color1Flood" />
-<feComposite operator="in" in2="noise1Clipped" in="color1Flood" result="color1" />
-<feMerge result="effect2_noise_18_2">
-<feMergeNode in="effect1_foregroundBlur_18_2" />
-<feMergeNode in="color1" />
-</feMerge>
-</filter>
-</defs>
+<svg width="40vw" viewBox="0 -500 667.159 2686.35" xmlns="http://www.w3.org/2000/svg" overflow="visible">
+  <g filter="url(#filter0_n_0_1)">
+    <path d="M78.0001 6.35299C50.1726 -6.59346 15.9145 -7.18336 74.6619 78.253L0 1686.35C23.3334 1655.52 111 1576.35 275 1506.35C480 1418.85 673.5 1328.35 667 1142.35C660.5 956.353 581 798.853 417 664.353C253 529.853 340.5 514.353 303 362.853C265.5 211.353 215.5 262.853 100 112.853C90.1002 99.996 81.7114 88.5051 74.6619 78.253L78.0001 6.35299Z"
+          fill="#58C4DC"/>
+  </g>
+  <defs>
+    <filter id="filter0_n_0_1"
+            x="-1000" y="-1000" width="4000" height="4000"
+            filterUnits="userSpaceOnUse"
+            primitiveUnits="userSpaceOnUse"
+            color-interpolation-filters="sRGB">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="175" result="blurred"/>
+    </filter>
+  </defs>
 </svg>

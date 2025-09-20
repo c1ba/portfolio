@@ -1,0 +1,35 @@
+@use '../../app/styles/' as *;
+
+.patternContainer {
+  width: 100vw;
+  z-index: 0;
+  position: absolute;
+  transform: scaleX(-1);
+}
+
+.gridPositionLast {
+  grid-column: -2 / -1;
+
+  @include media-query-mobile {
+    display: none;
+  }
+}
+
+.gridPositionFirst {
+  grid-column: 1 / 2;
+
+  @include media-query-mobile {
+    grid-column: 1 / -1;
+    svg {
+      width: 100vw;
+    }
+  }
+}
+
+.flipHorizontal {
+  transform: scaleX(-1);
+}
+
+.overlap {
+  margin-top: 85%;
+}

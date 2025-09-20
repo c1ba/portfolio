@@ -7,6 +7,7 @@
 .headingContainer {
   display: flex;
   justify-content: space-between;
+  align-items: flex-end;
 
   @include media-query-mobile {
     flex-direction: column-reverse;
