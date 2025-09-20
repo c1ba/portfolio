@@ -1,28 +1,36 @@
 import {NumberRange} from '@/utils/types';
 
-export type DesktopColumnRange = NumberRange<1, 9>;
+export type DesktopColumnRange = NumberRange<1, 10>;
 
-export type TabletLandscapeColumnRange = NumberRange<1, 8>;
+export type TabletLandscapeColumnRange = NumberRange<1, 9>;
 
-export type TabletPortrtaitColumnRange = NumberRange<1, 6>;
+export type TabletPortrtaitColumnRange = NumberRange<1, 7>;
 
-export type MobileColumnRange = NumberRange<1, 4>;
+export type MobileColumnRange = NumberRange<1, 5>;
+
+type DeviceRange =
+  | DesktopColumnRange
+  | TabletLandscapeColumnRange
+  | TabletPortrtaitColumnRange
+  | MobileColumnRange;
+
+type ColumnSpanRange<D extends DeviceRange> = D | [D, D];
 
 export type ColumnSpan = Partial<{
   desktop: {
-    range: DesktopColumnRange;
+    range: ColumnSpanRange<DesktopColumnRange>;
     symmetric?: boolean;
   };
   tabletLandscape: {
-    range: TabletLandscapeColumnRange;
+    range: ColumnSpanRange<TabletLandscapeColumnRange>;
     symmetric?: boolean;
   };
   tabletPortrait: {
-    range: TabletPortrtaitColumnRange;
+    range: ColumnSpanRange<TabletPortrtaitColumnRange>;
     symmetric?: boolean;
   };
   mobile: {
-    range: MobileColumnRange;
+    range: ColumnSpanRange<MobileColumnRange>;
     symmetric?: boolean;
   };
 }>;

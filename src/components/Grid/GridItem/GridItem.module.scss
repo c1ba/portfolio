@@ -12,6 +12,12 @@
   .mobile-symmetric-span-#{$i} {
     grid-column: -#{$i} / $i;
   }
+
+  @for $j from 1 through $i {
+    .mobile-span-#{$j}-#{$i} {
+      grid-column: #{$j} / #{$i};
+    }
+  }
 }
 
 @include media-query-tablet-portrait {
@@ -22,6 +28,12 @@
 
     .tablet-portrait-symmetric-span-#{$i} {
       grid-column: -#{$i} / $i;
+    }
+
+    @for $j from 1 through $i {
+      .tablet-portrait-span-#{$j}-#{$i} {
+        grid-column: #{$j} / #{$i};
+      }
     }
   }
 }
@@ -34,6 +46,12 @@
     .tablet-landscape-symmetric-span-#{$i} {
       grid-column: -#{$i} / $i;
     }
+
+    @for $j from 1 through $i {
+      .tablet-landscape-span-#{$j}-#{$i} {
+        grid-column: #{$j} / #{$i};
+      }
+    }
   }
 }
 @include media-query-desktop {
@@ -44,6 +62,12 @@
 
     .desktop-symmetric-span-#{$i} {
       grid-column: -#{$i} / $i;
+    }
+
+    @for $j from 1 through $i {
+      .desktop-span-#{$j}-#{$i} {
+        grid-column: #{$j} / #{$i};
+      }
     }
   }
 }

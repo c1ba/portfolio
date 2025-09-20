@@ -1,4 +1,4 @@
-import RichText from '@/components/RichText';
+import RichText from '@/blocks/RichText';
 import {JSX} from 'react/jsx-runtime';
 
 const MAPPING: {

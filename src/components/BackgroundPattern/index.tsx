@@ -1,4 +1,4 @@
-import Grid from '../Grid/Grid';
+import GridItem from '../Grid/GridItem';
 import GridContainer from '../Grid/GridContainer';
 import styles from './BackgroundPattern.module.scss';
 import BackgroundShape from '@/assets/Shape.svg';
@@ -7,14 +7,14 @@ const BackgroundPattern = () => {
   return (
     <div className={styles.patternContainer}>
       <GridContainer>
-        <Grid className={styles.gridPositionFirst}>
+        <GridItem className={styles.gridPositionFirst}>
           <BackgroundShape />
-        </Grid>
-        <Grid
+        </GridItem>
+        <GridItem
           className={`${styles.gridPositionLast} ${styles.flipHorizontal} ${styles.overlap}`}
         >
           <BackgroundShape />
-        </Grid>
+        </GridItem>
       </GridContainer>
     </div>
   );

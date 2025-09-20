@@ -1,7 +1,6 @@
-import {StrapiImage} from '@/utils/cms/types';
 import Image from 'next/image';
 import styles from './GeneralHero.module.scss';
-import Grid from '@/components/Grid/Grid';
+import GridItem from '@/components/Grid/GridItem';
 import GridContainer from '@/components/Grid/GridContainer';
 import {ColumnSpan} from '@/app/styles/types';
 import React from 'react';
@@ -41,10 +40,10 @@ const GeneralHero = ({
     .filter(Boolean)
     .join(' ');
   return (
-    <Grid>
+    <GridItem>
       <section className={sectionClassNames} ref={ref}>
         <GridContainer>
-          <Grid
+          <GridItem
             columnSpan={COLUMN_SPAN_CONFIG}
             className={gridContentClassNames}
           >
@@ -64,10 +63,10 @@ const GeneralHero = ({
                 height={parseInt(thumbnail.height, 10)}
               />
             )}
-          </Grid>
+          </GridItem>
         </GridContainer>
       </section>
-    </Grid>
+    </GridItem>
   );
 };
 

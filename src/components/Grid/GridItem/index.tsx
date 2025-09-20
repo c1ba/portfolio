@@ -1,5 +1,5 @@
 import {PropsWithChildren} from 'react';
-import styles from './Grid.module.scss';
+import styles from './GridItem.module.scss';
 import {NumberRange} from '@/utils/types';
 import {dashCase} from '@/utils/stringUtils';
 import {ColumnSpan} from '@/app/styles/types';
@@ -9,7 +9,7 @@ type GridProps = PropsWithChildren<{
   className?: string;
 }>;
 
-const Grid = ({columnSpan, className, children, ...props}: GridProps) => {
+const GridItem = ({columnSpan, className, children, ...props}: GridProps) => {
   const columnSpans = !columnSpan
     ? []
     : Object.entries(columnSpan)
@@ -18,7 +18,9 @@ const Grid = ({columnSpan, className, children, ...props}: GridProps) => {
         })
         .map(([device, {range, symmetric}]) => {
           const deviceClass = dashCase(device);
-          const className = `${deviceClass}-${symmetric ? 'symmetric-' : ''}span-${range}`;
+          const className = !Array.isArray(range)
+            ? `${deviceClass}-${symmetric ? 'symmetric-' : ''}span-${range}`
+            : `${deviceClass}-span-${range[0]}-${range[1]}`;
           return styles[className];
         })
         .filter(Boolean);
@@ -34,4 +36,4 @@ const Grid = ({columnSpan, className, children, ...props}: GridProps) => {
   );
 };
 
-export default Grid;
+export default GridItem;

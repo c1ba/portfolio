@@ -1,4 +1,4 @@
-import Grid from '@/components/Grid/Grid';
+import GridItem from '@/components/Grid/GridItem';
 import TEMPLATE_MAP from '@/utils/cms/mapping';
 import {StrapiInnerPages} from '@/utils/cms/types';
 import {snakeCase} from '@/utils/stringUtils';
@@ -20,11 +20,11 @@ export const mapInnerPages = (pages: StrapiInnerPages) => {
     }
 
     return (
-      <Grid key={`${templateId}-${index}`}>
+      <GridItem key={`${templateId}-${index}`}>
         <section id={templateId}>
           <Template data={data} />
         </section>
-      </Grid>
+      </GridItem>
     );
   });
 };

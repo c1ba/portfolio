@@ -4,11 +4,13 @@ import styles from './PictureFrame.module.scss';
 
 type PictureFrameProps = {
   image: StrapiImage;
+  className?: string;
 };
 
-const PictureFrame = ({image}: PictureFrameProps) => {
+const PictureFrame = ({image, className, ...props}: PictureFrameProps) => {
+  const classNames = [styles.pictureFrame, className].filter(Boolean).join(' ');
   return (
-    <div className={styles.pictureFrame}>
+    <div className={classNames} {...props}>
       <div className={styles.triangleBottomRight} />
       <Image
         src={image.url}

@@ -1,10 +1,10 @@
-import Grid from '@/components/Grid/Grid';
+import GridItem from '@/components/Grid/GridItem';
 import GridContainer from '@/components/Grid/GridContainer';
 import {ColumnSpan} from '@/app/styles/types';
 import {StrapiImage} from '@/utils/cms/types';
-import Image from 'next/image';
 import styles from './HeroWithProfilePicture.module.scss';
 import PictureFrame from './PictureFrame';
+import RichText from '@/components/RichText';
 
 export type HeroWithProfilePictureProps = {
   heading: string;
@@ -33,19 +33,46 @@ const HeroWithProfilePicture = ({
   profilePicture,
 }: HeroWithProfilePictureProps) => {
   return (
-    <Grid>
+    <GridItem>
       <section className={styles.heroContainer}>
         <GridContainer>
-          <Grid columnSpan={COLUMN_SPAN_CONFIG}>
-            <div className={styles.headingContainer}>
-              <h2>{heading}</h2>
-              {profilePicture && <PictureFrame image={profilePicture} />}
-            </div>
-            {subheading && <p>{subheading}</p>}
-          </Grid>
+          <GridItem columnSpan={COLUMN_SPAN_CONFIG}>
+            <GridContainer>
+              {profilePicture && (
+                <GridItem
+                  columnSpan={{
+                    desktop: {range: [8, 9]},
+                    tabletLandscape: {range: [7, 8]},
+                    tabletPortrait: {range: [4, 5]},
+                    mobile: {range: [3, 4]},
+                  }}
+                >
+                  <PictureFrame
+                    image={profilePicture}
+                    className={styles.profilePicture}
+                  />
+                </GridItem>
+              )}
+              <GridItem
+                columnSpan={{desktop: {range: 7}, tabletLandscape: {range: 6}}}
+              >
+                <h2 className={styles.heading}>{heading}</h2>
+              </GridItem>
+              {subheading && (
+                <GridItem
+                  columnSpan={{
+                    desktop: {range: 7},
+                    tabletLandscape: {range: 6},
+                  }}
+                >
+                  <RichText content={subheading} />
+                </GridItem>
+              )}
+            </GridContainer>
+          </GridItem>
         </GridContainer>
       </section>
-    </Grid>
+    </GridItem>
   );
 };
 
