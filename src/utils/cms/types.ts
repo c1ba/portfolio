@@ -20,6 +20,12 @@ export type StrapiHero = {
   EnableWhiteBackground?: boolean;
 };
 
+export type StrapiCard = {
+  Title: string;
+  URL: string;
+  BackgroundImage: StrapiImage;
+};
+
 const STRAPI_INNER_PAGES = ['about_page', 'contact_page'] as const;
 type StrapiInnerPageKey = (typeof STRAPI_INNER_PAGES)[number];
 

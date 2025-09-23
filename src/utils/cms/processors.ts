@@ -1,5 +1,5 @@
 import {GeneralHeroProps} from '@/components/Hero/types';
-import {StrapiHero, StrapiImage} from './types';
+import {StrapiCard, StrapiHero, StrapiImage} from './types';
 import {HeroWithProfilePictureProps} from '@/components/Hero/HeroWithProfilePicture';
 import env from '@/utils/env.mjs';
 
@@ -30,4 +30,13 @@ export const processStrapiHeroWithProfilePicture = (
       ? {...h.Thumbnail, url: `${NEXT_PUBLIC_CDN_HOST}${h.Thumbnail.url}`}
       : undefined,
   };
+};
+
+export const processStrapiCinematicCards = (cards: StrapiCard[]) => {
+  return (cards || []).map((card) => ({
+    title: card.Title,
+    url: card.URL,
+    backgroundImage: card.BackgroundImage,
+    icons: [],
+  }));
 };

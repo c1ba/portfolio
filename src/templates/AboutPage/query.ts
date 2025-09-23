@@ -6,10 +6,6 @@ export const fragment = gql`
       ...StrapiHero
     }
     FlexibleContent {
-      ... on ComponentGeneralRichText {
-        HtmlId
-        Content
-      }
       ...CinematicCarousel
       ...RichText
     }
