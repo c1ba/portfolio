@@ -30,7 +30,7 @@ const ImageCard = ({
       <Image
         className={styles.imageCard}
         src={image.url}
-        alt={image.alternativeText}
+        alt={image.alternativeText || 'Ïmage card'}
         fill={true}
       />
     </CardFrame>

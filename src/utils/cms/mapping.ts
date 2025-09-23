@@ -1,8 +1,16 @@
 import AboutPage from '@/templates/AboutPage';
 import aboutPageQuery from '@/templates/AboutPage/query';
 import ContactPage from '@/templates/ContactPage';
+import homePageQuery from '@/templates/HomePage/query';
+import {JSX} from 'react';
 
-const TEMPLATE_MAP = {
+const MAP_KEYS = ['aboutPage', 'contactPage'] as const;
+export type TemplateType = (typeof MAP_KEYS)[number];
+
+const TEMPLATE_MAP: {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [key in TemplateType]: (props: any) => JSX.Element;
+} = {
   aboutPage: AboutPage,
   contactPage: ContactPage,
 };
@@ -10,9 +18,8 @@ const TEMPLATE_MAP = {
 export const QUERY_MAP = {
   aboutPage: aboutPageQuery,
   contactPage: aboutPageQuery,
+  homePage: homePageQuery,
 };
-
-export type TemplateType = keyof typeof TEMPLATE_MAP;
 
 export const TEMPLATE_TYPES = Object.keys(TEMPLATE_MAP);
 

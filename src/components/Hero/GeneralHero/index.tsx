@@ -58,7 +58,7 @@ const GeneralHero = ({
             {thumbnail && (
               <Image
                 src={thumbnail.url}
-                alt={thumbnail.alternativeText}
+                alt={thumbnail.alternativeText || 'Homepage Banner Thumbnail'}
                 width={parseInt(thumbnail.width, 10)}
                 height={parseInt(thumbnail.height, 10)}
               />

@@ -1,14 +1,17 @@
-import client from "@/utils/cms/client";
-import TEMPLATE_MAP, { QUERY_MAP, TemplateType } from "@/utils/cms/mapping";
-import { notFound } from "next/navigation";
+import client from '@/utils/cms/client';
+import TEMPLATE_MAP, {QUERY_MAP, TemplateType} from '@/utils/cms/mapping';
+import {notFound} from 'next/navigation';
 
 export async function generateStaticParams() {
   const urls = await (await client).querySitewideURLs();
-  const slugs = urls.map(({url, pageType}) => ({slug: url.split('/').filter((slugSec) => !!slugSec), pageType}))
+  const slugs = urls.map(({url, pageType}) => ({
+    slug: url.split('/').filter((slugSec) => !!slugSec),
+    pageType,
+  }));
   return slugs;
 }
 
-const PageGenerator = async ({ params }: PageProps<'/[...slug]'>) => {
+const PageGenerator = async ({params}: PageProps<'/[...slug]'>) => {
   const {slug} = await params;
   const pageUrl = `/${slug.join('/')}`;
   const urls = await (await client).querySitewideURLs();

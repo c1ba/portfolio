@@ -173,15 +173,11 @@ class CMSClient {
         throw new Error(`[${error.name}]: ${error.message}`);
       }
 
-      return {
-        props: {
-          data,
-        },
-      };
+      return data;
     } catch (err) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       console.error('[CMSClient] Error when querying single page props: ', err);
-      return {props: {data: null}};
+      return null;
     }
   }
 

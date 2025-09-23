@@ -14,7 +14,7 @@ const PictureFrame = ({image, className, ...props}: PictureFrameProps) => {
       <div className={styles.triangleBottomRight} />
       <Image
         src={image.url}
-        alt={image.alternativeText}
+        alt={image.alternativeText || 'Profile Picture'}
         width={197}
         height={198}
       />

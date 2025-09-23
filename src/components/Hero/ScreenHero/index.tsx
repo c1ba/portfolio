@@ -1,3 +1,4 @@
+'use client';
 import useInitialScroll from '@/helpers/useInitialScroll';
 import GeneralHero from '../GeneralHero';
 import {GeneralHeroProps} from '../types';

@@ -1,17 +1,17 @@
-import GeneralHero from '@/components/Hero/GeneralHero';
 import {processStrapiHero} from '@/utils/cms/processors';
-import {StrapiHomePage} from './types';
 import {mapInnerPages} from '@/helpers/innerPages';
 import ScreenHero from '@/components/Hero/ScreenHero';
+import {StrapiHero, StrapiInnerPages} from '@/utils/cms/types';
 
-type PageData = {
-  page: StrapiHomePage;
+type PageProps = {
+  data: {
+    Hero: StrapiHero;
+    InnerPages: StrapiInnerPages;
+  };
 };
 
-const HomePage = ({page}: PageData) => {
-  const {
-    homePage: {Hero, InnerPages},
-  } = page;
+const HomePage = ({data}: PageProps) => {
+  const {Hero, InnerPages} = data;
 
   return (
     <>
