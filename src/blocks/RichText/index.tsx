@@ -2,26 +2,12 @@ import {ColumnSpan} from '@/app/styles/types';
 import GridItem from '@/components/Grid/GridItem';
 import GridContainer from '@/components//Grid/GridContainer';
 import RichTextComponent from '@/components/RichText';
+import {COLUMN_SPAN_CONFIG} from '@/app/styles/common';
 
 type RichTextProps = {
   HtmlId?: string;
   Content: string;
   className?: string;
-};
-
-const COLUMN_SPAN_CONFIG: ColumnSpan = {
-  desktop: {
-    range: 3,
-    symmetric: true,
-  },
-  tabletLandscape: {
-    range: 2,
-    symmetric: true,
-  },
-  tabletPortrait: {
-    range: 2,
-    symmetric: true,
-  },
 };
 
 const RichText = ({HtmlId, Content, className, ...props}: RichTextProps) => {

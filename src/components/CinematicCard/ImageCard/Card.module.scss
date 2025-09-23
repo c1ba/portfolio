@@ -1,0 +1,7 @@
+@use '../../../app/styles/' as *;
+@use '../CinematicCard.module.scss' as cinematicCardConfig;
+
+.imageCard {
+  border-radius: cinematicCardConfig.$border-radius;
+  position: absolute;
+}

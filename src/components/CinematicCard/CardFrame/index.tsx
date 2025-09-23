@@ -1,0 +1,54 @@
+import styles from './CardFrame.module.scss';
+import React, {JSX, PropsWithChildren} from 'react';
+
+type CardFrameProps = {
+  title?: string;
+  url?: string;
+  enableHover?: boolean;
+  className?: string;
+  animations?: string;
+};
+
+const CardFrame = ({
+  title,
+  url,
+  enableHover = true,
+  className,
+  animations,
+  children,
+}: PropsWithChildren<CardFrameProps>) => {
+  const classNames = [
+    styles.mainCard,
+    enableHover ? styles.mainCardHover : '',
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
+
+  const foregroundClassNames = [
+    styles.foreground,
+    enableHover ? styles.foregroundHover : '',
+  ]
+    .filter(Boolean)
+    .join(' ');
+
+  const Content = ({className}: {className?: string}) => {
+    return (
+      <div className={className}>
+        {title && <p className={styles.title}>{title}</p>}
+        <div className={styles.glass} />
+        <div className={foregroundClassNames} />
+        {children}
+      </div>
+    );
+  };
+  return url ? (
+    <a href={url} target="_blank" className={classNames}>
+      <Content />
+    </a>
+  ) : (
+    <Content className={classNames} />
+  );
+};
+
+export default CardFrame;

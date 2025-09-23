@@ -1,0 +1,324 @@
+@use '../../app/styles/' as *;
+
+$animation-time: 0.7s;
+
+$card-levels: 4;
+
+@for $i from 1 through $card-levels {
+  $animation-name: zIndexAnim-#{$i};
+
+  .zIndex#{$i} {
+    z-index: $i;
+  }
+
+  .setZIndex#{$i} {
+    animation: #{$animation-name} $animation-time ease-in-out;
+  }
+  @keyframes #{$animation-name} {
+    50% {
+      z-index: $i;
+    }
+
+    100% {
+      z-index: $i;
+    }
+  }
+
+  $slide-animation-name-left: slideOutLeftAnim#{$i};
+  $slide-animation-name-left-vertical: slideOutVerticalLeftAnim#{$i};
+  $down-level: $i - 1;
+  .slideOutLeft#{$i} {
+    animation: #{$slide-animation-name-left-vertical}
+      $animation-time
+      ease-in-out;
+    @include media-query-desktop {
+      animation: #{$slide-animation-name-left} $animation-time ease-in-out;
+    }
+  }
+  @keyframes #{$slide-animation-name-left} {
+    0% {
+      transform: scale(1) translateX(0);
+    }
+
+    50% {
+      z-index: $down-level;
+    }
+
+    95% {
+      transform: scale(0.75) translateX(50%);
+      z-index: $down-level;
+    }
+
+    100% {
+      transform: scale(0.75) translateX(50%);
+      z-index: $down-level;
+    }
+  }
+
+  @keyframes #{$slide-animation-name-left-vertical} {
+    0% {
+      transform: scale(1) translateX(0);
+    }
+
+    50% {
+      z-index: $down-level;
+    }
+
+    95% {
+      transform: scale(0.75) translateY(50%);
+      z-index: $down-level;
+    }
+
+    100% {
+      transform: scale(0.75) translateY(50%);
+      z-index: $down-level;
+    }
+  }
+
+  $slide-animation-name-right: slideOutRightAnim#{$i};
+  $slide-animation-name-right-vertical: slideOutVerticalRightAnim#{$i};
+  .slideOutRight#{$i} {
+    animation: #{$slide-animation-name-right-vertical}
+      $animation-time
+      ease-in-out;
+    @include media-query-desktop {
+      animation: #{$slide-animation-name-right} $animation-time ease-in-out;
+    }
+  }
+  @keyframes #{$slide-animation-name-right} {
+    0% {
+      transform: scale(1) translateX(0);
+    }
+
+    50% {
+      z-index: $down-level;
+    }
+
+    95% {
+      transform: scale(0.75) translateX(-50%);
+      z-index: $down-level;
+    }
+
+    100% {
+      transform: scale(0.75) translateX(-50%);
+      z-index: $down-level;
+    }
+  }
+
+  @keyframes #{$slide-animation-name-right-vertical} {
+    0% {
+      transform: scale(1) translateX(0);
+    }
+
+    50% {
+      z-index: $down-level;
+    }
+
+    95% {
+      transform: scale(0.75) translateY(-50%);
+      z-index: $down-level;
+    }
+
+    100% {
+      transform: scale(0.75) translateY(-50%);
+      z-index: $down-level;
+    }
+  }
+
+  $up-level: $i - 1;
+  $slide-in-animation-name-left: slideInLeftAnim#{$i};
+  $slide-in-animation-name-left-vertical: slideInVerticalLeftAnim#{$i};
+  .slideInLeft#{$i} {
+    animation: #{$slide-in-animation-name-left-vertical}
+      $animation-time
+      ease-in-out;
+    @include media-query-desktop {
+      animation: #{$slide-in-animation-name-left} $animation-time ease-in-out;
+    }
+  }
+
+  @keyframes #{$slide-in-animation-name-left} {
+    0% {
+      transform: scale(1) translateX(0);
+    }
+
+    50% {
+      z-index: $up-level;
+    }
+
+    95% {
+      transform: scale(1.25) translateX(50%);
+      z-index: $up-level;
+    }
+
+    100% {
+      transform: scale(1.25) translateX(50%);
+      z-index: $up-level;
+    }
+  }
+
+  @keyframes #{$slide-in-animation-name-left-vertical} {
+    0% {
+      transform: scale(1) translateX(0);
+    }
+
+    50% {
+      z-index: $up-level;
+    }
+
+    95% {
+      transform: scale(1.25) translateY(50%);
+      z-index: $up-level;
+    }
+
+    100% {
+      transform: scale(1.25) translateY(50%);
+      z-index: $up-level;
+    }
+  }
+
+  $slide-in-animation-name-right: slideInRightAnim#{$i};
+  $slide-in-animation-name-right-vertical: slideInVerticalRightAnim#{$i};
+  .slideInRight#{$i} {
+    animation: #{$slide-in-animation-name-right-vertical}
+      $animation-time
+      ease-in-out;
+    @include media-query-desktop {
+      animation: #{$slide-in-animation-name-right} $animation-time ease-in-out;
+    }
+  }
+
+  @keyframes #{$slide-in-animation-name-right} {
+    0% {
+      transform: scale(1) translateX(0);
+    }
+
+    50% {
+      z-index: $up-level;
+    }
+
+    95% {
+      transform: scale(1.25) translateX(-50%);
+      z-index: $up-level;
+    }
+
+    100% {
+      transform: scale(1.25) translateX(-50%);
+      z-index: $up-level;
+    }
+  }
+
+  @keyframes #{$slide-in-animation-name-right-vertical} {
+    0% {
+      transform: scale(1) translateX(0);
+    }
+
+    50% {
+      z-index: $up-level;
+    }
+
+    95% {
+      transform: scale(1.25) translateY(-50%);
+      z-index: $up-level;
+    }
+
+    100% {
+      transform: scale(1.25) translateY(-50%);
+      z-index: $up-level;
+    }
+  }
+}
+
+.backCardAnimLeft {
+  animation: backCardVerticalAnimationLeft $animation-time ease-in-out;
+  @include media-query-desktop {
+    animation: backCardAnimationLeft $animation-time ease-in-out;
+  }
+}
+
+@keyframes backCardAnimationLeft {
+  0% {
+    transform: translateX(0);
+  }
+
+  50% {
+    z-index: 1;
+  }
+
+  75% {
+    transform: translateX(245px);
+    z-index: 1;
+  }
+
+  100% {
+    transform: translateX(245px);
+    z-index: 1;
+  }
+}
+
+@keyframes backCardVerticalAnimationLeft {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    z-index: 1;
+  }
+
+  95% {
+    transform: translateY(100px);
+    z-index: 1;
+  }
+
+  100% {
+    transform: translateY(100px);
+    z-index: 1;
+  }
+}
+
+.backCardAnimRight {
+  animation: backCardVerticalAnimationRight $animation-time ease-in-out;
+  @include media-query-desktop {
+    animation: backCardAnimationRight $animation-time ease-in-out;
+  }
+}
+
+@keyframes backCardAnimationRight {
+  0% {
+    transform: translateX(0);
+  }
+
+  50% {
+    z-index: 1;
+  }
+
+  75% {
+    transform: translateX(-245px);
+    z-index: 1;
+  }
+
+  100% {
+    transform: translateX(-245px);
+    z-index: 1;
+  }
+}
+
+@keyframes backCardVerticalAnimationRight {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    z-index: 1;
+  }
+
+  95% {
+    transform: translateY(-100px);
+    z-index: 1;
+  }
+
+  100% {
+    transform: translateY(-100px);
+    z-index: 1;
+  }
+}

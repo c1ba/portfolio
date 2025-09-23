@@ -10,24 +10,7 @@ export const fragment = gql`
         HtmlId
         Content
       }
-      ... on ComponentGeneralCinematicCarousel {
-        Cards {
-          Title
-          URL
-          cta {
-            Label
-            ScreenreaderText
-            Type
-            URL
-          }
-          BackgroundImage {
-            alternativeText
-            width
-            height
-            url
-          }
-        }
-      }
+      ...CinematicCarousel
       ...RichText
     }
   }

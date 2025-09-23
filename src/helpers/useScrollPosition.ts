@@ -3,15 +3,13 @@ import {useEffect, useState} from 'react';
 const useScrollPosition = () => {
   const [scrollY, setScrollY] = useState<number | undefined>(undefined);
 
-  const onScroll = (_e?: Event, container?: HTMLElement) => {
-    if (!container) {
-      console.error('Container not defined.');
-      return;
-    }
+  const onScroll = (_e?: Event) => {
+    const body = document.body;
+
     const html = document.documentElement;
     const height = Math.max(
-      container.scrollHeight,
-      container.offsetHeight,
+      body.scrollHeight,
+      body.offsetHeight,
       html.clientHeight,
       html.scrollHeight,
       html.offsetHeight,
@@ -19,23 +17,18 @@ const useScrollPosition = () => {
     if (height <= window.innerHeight) {
       return;
     }
-    setScrollY(container.scrollHeight);
+    setScrollY(window.scrollY);
   };
 
   useEffect(() => {
-    const main = document.querySelector('main');
-    if (!main) {
-      console.error('No main element found.');
-      return;
-    }
+    document.addEventListener('scroll', onScroll);
 
-    const scrollEvent = (e: Event) => {
-      onScroll(e, main);
-    };
-    main.addEventListener('scroll', scrollEvent);
+    return () => document.removeEventListener('scroll', onScroll);
+  }, []);
 
-    return () => main.removeEventListener('scroll', scrollEvent);
-  });
+  useEffect(() => {
+    onScroll();
+  }, []);
 
   return scrollY;
 };

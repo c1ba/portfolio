@@ -1,9 +1,14 @@
 import {GeneralHeroProps} from '@/components/Hero/types';
-import {StrapiHero} from './types';
+import {StrapiHero, StrapiImage} from './types';
 import {HeroWithProfilePictureProps} from '@/components/Hero/HeroWithProfilePicture';
 import env from '@/utils/env.mjs';
 
 const NEXT_PUBLIC_CDN_HOST = env.NEXT_PUBLIC_CDN_HOST;
+
+export const processStrapiImage = (image: StrapiImage) => ({
+  ...image,
+  url: `${NEXT_PUBLIC_CDN_HOST}${image.url}`,
+});
 
 export const processStrapiHero = (hero: StrapiHero): GeneralHeroProps => {
   return {
