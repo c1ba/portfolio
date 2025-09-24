@@ -1,0 +1,115 @@
+@use '../../app/theme/' as *;
+
+$icon-xs: 16px;
+$icon-sm: 20px;
+$icon-md: 24px;
+$icon-lg: 32px;
+$icon-xl: 48px;
+
+/* Base icon styles */
+.icon {
+  display: inline-block;
+  fill: currentColor; /* inherits text color */
+}
+
+/* Size utilities */
+.icon-xs {
+  width: var(--icon-xs);
+  height: var(--icon-xs);
+}
+
+.icon-sm {
+  width: var(--icon-sm);
+  height: var(--icon-sm);
+}
+
+.icon-md {
+  width: var(--icon-md);
+  height: var(--icon-md);
+}
+
+.icon-lg {
+  width: var(--icon-lg);
+  height: var(--icon-lg);
+}
+
+.icon-xl {
+  width: var(--icon-xl);
+  height: var(--icon-xl);
+}
+
+/* Responsive adjustments */
+
+/* Mobile first (default above) */
+
+/* Tablet Portrait */
+@include media-query-tablet-portrait {
+  .icon-xs {
+    width: 18px;
+    height: 18px;
+  }
+  .icon-sm {
+    width: 22px;
+    height: 22px;
+  }
+  .icon-md {
+    width: 26px;
+    height: 26px;
+  }
+  .icon-lg {
+    width: 34px;
+    height: 34px;
+  }
+  .icon-xl {
+    width: 52px;
+    height: 52px;
+  }
+}
+
+/* Tablet Landscape */
+@include media-query-tablet-landscape {
+  .icon-xs {
+    width: 20px;
+    height: 20px;
+  }
+  .icon-sm {
+    width: 24px;
+    height: 24px;
+  }
+  .icon-md {
+    width: 28px;
+    height: 28px;
+  }
+  .icon-lg {
+    width: 36px;
+    height: 36px;
+  }
+  .icon-xl {
+    width: 56px;
+    height: 56px;
+  }
+}
+
+/* Desktop */
+@include media-query-desktop {
+  .icon-xs {
+    width: 20px;
+    height: 20px;
+  }
+  .icon-sm {
+    width: 24px;
+    height: 24px;
+  }
+  .icon-md {
+    width: 32px;
+    height: 32px;
+  }
+  .icon-lg {
+    width: 40px;
+    height: 40px;
+  }
+  .icon-xl {
+    width: 64px;
+    height: 64px;
+  }
+}

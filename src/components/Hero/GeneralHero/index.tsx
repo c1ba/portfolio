@@ -2,7 +2,7 @@ import Image from 'next/image';
 import styles from './GeneralHero.module.scss';
 import GridItem from '@/components/Grid/GridItem';
 import GridContainer from '@/components/Grid/GridContainer';
-import {ColumnSpan} from '@/app/styles/types';
+import {ColumnSpan} from '@/app/theme/types';
 import React from 'react';
 import {ForwardedRef} from '@/utils/types';
 import {GeneralHeroProps} from '../types';

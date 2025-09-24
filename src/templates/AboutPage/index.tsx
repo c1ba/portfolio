@@ -4,7 +4,7 @@ import {processStrapiHeroWithProfilePicture} from '@/utils/cms/processors';
 import {StrapiFlexibleContent, StrapiHero} from '@/utils/cms/types';
 
 type PageProps = {
-  Hero: StrapiHero | [StrapiHero];
+  Hero: StrapiHero;
   FlexibleContent: StrapiFlexibleContent;
 };
 

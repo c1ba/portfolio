@@ -1,4 +1,4 @@
-import {ColumnSpan} from '@/app/styles/types';
+import {ColumnSpan} from '@/app/theme/types';
 import styles from './RichText.module.scss';
 import HtmlSanitizer from '@/helpers/HtmlSanitizer';
 

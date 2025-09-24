@@ -1,4 +1,4 @@
-import {COLUMN_SPAN_CONFIG} from '@/app/styles/common';
+import {COLUMN_SPAN_CONFIG} from '@/app/theme/common';
 import GridContainer from '@/components/Grid/GridContainer';
 import GridItem from '@/components/Grid/GridItem';
 import {StrapiImage} from '@/utils/cms/types';

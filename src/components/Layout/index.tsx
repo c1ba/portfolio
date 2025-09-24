@@ -1,9 +1,10 @@
-import '@/app/styles/globals.scss';
+import '@/app/theme/globals.scss';
 import GridContainer from '../Grid/GridContainer';
 import BackgroundPattern from '../BackgroundPattern';
 import styles from './Layout.module.scss';
+import client from '@/utils/cms/client';
 
-const Layout = ({
+const Layout = async ({
   children,
 }: Readonly<{
   children: React.ReactNode;

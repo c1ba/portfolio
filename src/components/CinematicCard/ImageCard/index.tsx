@@ -6,8 +6,9 @@ import CardFrame from '../CardFrame';
 
 type ImageCardProps = {
   title: string;
-  url: string;
-  backgroundImage: StrapiImage;
+  url?: string;
+  backgroundImage: StrapiImage | undefined;
+  icons?: {default: string; variant?: string}[];
   className?: string;
   animations?: string;
 };
@@ -16,6 +17,7 @@ const ImageCard = ({
   title,
   url,
   backgroundImage,
+  icons,
   className,
   animations,
 }: ImageCardProps) => {
@@ -26,13 +28,18 @@ const ImageCard = ({
       url={url}
       className={className}
       animations={animations}
+      icons={icons}
     >
-      <Image
-        className={styles.imageCard}
-        src={image.url}
-        alt={image.alternativeText || 'Ïmage card'}
-        fill={true}
-      />
+      {image ? (
+        <Image
+          className={styles.imageCard}
+          src={image.url}
+          alt={image.alternativeText || 'Ïmage card'}
+          fill={true}
+        />
+      ) : (
+        <></>
+      )}
     </CardFrame>
   );
 };

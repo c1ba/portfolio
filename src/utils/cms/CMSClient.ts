@@ -6,8 +6,8 @@ import {
   TypedDocumentNode,
 } from '@apollo/client';
 import {SetContextLink} from '@apollo/client/link/context';
-import {TemplateURLs} from './types';
-import {SITE_URLS} from './queries';
+import {StrapiIcon, StrapiProjectMeta, TemplateURLs} from './types';
+import {ICONS, PROJECT_METAS, SITE_URLS} from './queries';
 import {OperationVariables} from '@apollo/client';
 import {createFragmentRegistry} from '@apollo/client/cache';
 import {fragment as HERO} from '@/components/Hero/query';
@@ -52,14 +52,9 @@ class CMSClient {
       cache: new InMemoryCache(),
     });
     this.client = client;
-    // console.log(options.miscellanious?.fragments);
 
-    // TODO: Make a function to read programmatically all declared fragments throughout the code
     const fragmentsRegistry = createFragmentRegistry(
       ...(options.miscellanious?.fragments || []),
-      // THUMBNAIL,
-      // HERO,
-      // INNER_ABOUT_PAGE,
     );
 
     const cacheWithDeclaredFragments = new InMemoryCache({
@@ -73,36 +68,7 @@ class CMSClient {
       PROJECT_PATH,
       targetFiles || ['query.ts', 'fragments.ts'],
     );
-    // paths.forEach(async (path) => {
-    //     const windowsPath = path.replaceAll('/', '\\');
-    //     // const content = readFileSync(path, {encoding: 'utf-8'});
-    //     // console.log(content);
-    //     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    //     // eval(`import('file://${windowsPath}')`).then((imported: any) => console.log(imported));
 
-    //     const code = await import(/* webpackIgnore: true */`file://${windowsPath}`);
-    //     // console.log(code);
-    //     Object.entries(code).forEach(([variableName, value]) => {
-    //         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    //         const {kind, definitions, loc} = value as any;
-    //         if (kind !== 'Document') {
-    //             return;
-    //         }
-
-    //         if (definitions[0].kind !== 'FragmentDefinition') {
-    //             return;
-    //         }
-    //         // For sure there's a better way to use the value rather than recreating the gql. Look into it later.
-    // const {source} = loc;
-    // const {body} = source;
-    // const gqlFragment = gql`${body}`;
-
-    //         // // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    //         // fragments.push(gqlFragment);
-    //         fragments.push(value as DocumentNode);
-    //     });
-    //     console.log(path, fragments);
-    // });
     const overallFragments: DocumentNode[] = [];
     const promises = paths.map(async (path) => {
       // TODO: Make this work for other OSes as well
@@ -205,6 +171,45 @@ class CMSClient {
     } catch (err) {
       console.error('[CMSClient] Error when querying single page props: ', err);
       return null;
+    }
+  }
+
+  async queryIcons(filters?: {Code?: {in?: string[]}}) {
+    try {
+      const {data, error} = await this.client.query<{icons: StrapiIcon[]}>({
+        query: ICONS,
+        variables: {
+          filters,
+        },
+      });
+
+      if (error) {
+        throw new Error(`[${error.name}]: ${error.message}`);
+      }
+
+      return data?.icons || [];
+    } catch (err) {
+      console.error('[CMSClient] Error when querying single page props: ', err);
+      return [];
+    }
+  }
+
+  async queryProjects() {
+    try {
+      const {data, error} = await this.client.query<{
+        projectMetas: StrapiProjectMeta[];
+      }>({
+        query: PROJECT_METAS,
+      });
+
+      if (error) {
+        throw new Error(`[${error.name}]: ${error.message}`);
+      }
+
+      return data?.projectMetas || [];
+    } catch (err) {
+      console.error('[CMSClient] Error when querying single page props: ', err);
+      return [];
     }
   }
 }

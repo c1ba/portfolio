@@ -1,6 +1,6 @@
 import GridItem from '@/components/Grid/GridItem';
 import GridContainer from '@/components/Grid/GridContainer';
-import {ColumnSpan} from '@/app/styles/types';
+import {ColumnSpan} from '@/app/theme/types';
 import {StrapiImage} from '@/utils/cms/types';
 import styles from './HeroWithProfilePicture.module.scss';
 import PictureFrame from './PictureFrame';

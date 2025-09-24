@@ -25,7 +25,6 @@ const PageGenerator = async ({params}: PageProps<'/[...slug]'>) => {
   const query = QUERY_MAP[pageType as TemplateType];
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const pageData = await (await client).queryByURL<any>(pageUrl, query);
-  console.log(pageData);
 
   return <Template data={pageData} />;
 };

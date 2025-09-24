@@ -1,8 +1,8 @@
-import {ColumnSpan} from '@/app/styles/types';
+import {ColumnSpan} from '@/app/theme/types';
 import GridItem from '@/components/Grid/GridItem';
 import GridContainer from '@/components//Grid/GridContainer';
 import RichTextComponent from '@/components/RichText';
-import {COLUMN_SPAN_CONFIG} from '@/app/styles/common';
+import {COLUMN_SPAN_CONFIG} from '@/app/theme/common';
 
 type RichTextProps = {
   HtmlId?: string;

@@ -6,7 +6,6 @@ import {notFound} from 'next/navigation';
 
 const Page = async () => {
   const data = await (await client).querySinglePageProps<StrapiHomePage>(query);
-  console.log(data);
   if (!data) {
     notFound();
   }

@@ -26,6 +26,28 @@ export type StrapiCard = {
   BackgroundImage: StrapiImage;
 };
 
+export type StrapiProjectMeta = {
+  Title: string;
+  URL?: string;
+  Description?: string;
+  FrontendFramework?: string;
+  BackendFramework?: string;
+  APIType?: string;
+  Database?: string;
+  BackgroundImage: StrapiImage;
+};
+
+export type StrapiIcon = {
+  Code: string;
+  Label?: string;
+  Default: {
+    url: string;
+  };
+  Variant?: {
+    url: string;
+  };
+};
+
 const STRAPI_INNER_PAGES = ['about_page', 'contact_page'] as const;
 type StrapiInnerPageKey = (typeof STRAPI_INNER_PAGES)[number];
 

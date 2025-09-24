@@ -14,8 +14,9 @@ const TRANSITION_TIME = ANIMATION_TIME_IN_SECONDS * 1000;
 
 type ImageCard = {
   title: string;
-  url: string;
-  backgroundImage: StrapiImage;
+  url?: string;
+  backgroundImage?: StrapiImage;
+  icons?: {default: string; variant?: string}[];
 };
 
 type CinematicCardsProps = {
@@ -68,6 +69,7 @@ const CinematicCarousel = ({cards}: CinematicCardsProps) => {
                     title={card.title}
                     url={card.url}
                     backgroundImage={card.backgroundImage}
+                    icons={card.icons}
                     className={
                       isTransitioning ? animations[`slideOut${direction}4`] : ''
                     }

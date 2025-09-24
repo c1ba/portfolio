@@ -2,7 +2,7 @@ import {PropsWithChildren} from 'react';
 import styles from './GridItem.module.scss';
 import {NumberRange} from '@/utils/types';
 import {dashCase} from '@/utils/stringUtils';
-import {ColumnSpan} from '@/app/styles/types';
+import {ColumnSpan} from '@/app/theme/types';
 
 type GridProps = PropsWithChildren<{
   columnSpan?: ColumnSpan;

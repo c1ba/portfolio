@@ -1,9 +1,11 @@
+import Icon from '@/components/Icon/Icon';
 import styles from './CardFrame.module.scss';
 import React, {JSX, PropsWithChildren} from 'react';
 
 type CardFrameProps = {
   title?: string;
   url?: string;
+  icons?: {default: string; variant?: string}[];
   enableHover?: boolean;
   className?: string;
   animations?: string;
@@ -12,6 +14,7 @@ type CardFrameProps = {
 const CardFrame = ({
   title,
   url,
+  icons,
   enableHover = true,
   className,
   animations,
@@ -36,6 +39,13 @@ const CardFrame = ({
     return (
       <div className={className}>
         {title && <p className={styles.title}>{title}</p>}
+        {icons && (
+          <div className={styles.iconsContainer}>
+            {icons.map((icon, idx) => (
+              <Icon key={`${title}-icon-${idx}`} src={icon.default} size="lg" />
+            ))}
+          </div>
+        )}
         <div className={styles.glass} />
         <div className={foregroundClassNames} />
         {children}

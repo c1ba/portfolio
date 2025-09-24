@@ -12,3 +12,35 @@ export const SITE_URLS = gql`
     )}
   }
 `;
+
+export const PROJECT_METAS = gql`
+  query ProjectMetas {
+    projectMetas {
+      Title
+      URL
+      Description
+      FrontendFramework
+      BackendFramework
+      APIType
+      Database
+      BackgroundImage {
+        ...StrapiThumbnail
+      }
+    }
+  }
+`;
+
+export const ICONS = gql`
+  query Icons {
+    icons {
+      Code
+      Label
+      Default {
+        url
+      }
+      Variant {
+        url
+      }
+    }
+  }
+`;

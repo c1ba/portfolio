@@ -6,6 +6,7 @@ export const fragment = gql`
       ...StrapiHero
     }
     FlexibleContent {
+      ...ProjectsList
       ...CinematicCarousel
       ...RichText
     }
