@@ -73,6 +73,7 @@ const CinematicCarousel = ({cards}: CinematicCardsProps) => {
                     className={
                       isTransitioning ? animations[`slideOut${direction}4`] : ''
                     }
+                    enableStartFade={!isTransitioning}
                   />
                 );
               })}

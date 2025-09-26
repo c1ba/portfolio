@@ -11,7 +11,7 @@ type ImageCardProps = {
   backgroundImage: StrapiImage | undefined;
   icons?: Icon[];
   className?: string;
-  animations?: string;
+  enableStartFade?: boolean;
 };
 
 const ImageCard = ({
@@ -20,7 +20,7 @@ const ImageCard = ({
   backgroundImage,
   icons,
   className,
-  animations,
+  enableStartFade,
 }: ImageCardProps) => {
   const image = processStrapiImage(backgroundImage);
   return (
@@ -28,7 +28,7 @@ const ImageCard = ({
       title={title}
       url={url}
       className={className}
-      animations={animations}
+      enableStartFade={enableStartFade}
       icons={icons}
     >
       {image ? (
@@ -39,7 +39,7 @@ const ImageCard = ({
           fill={true}
         />
       ) : (
-        <></>
+        <div className={styles.cardBackground} />
       )}
     </CardFrame>
   );

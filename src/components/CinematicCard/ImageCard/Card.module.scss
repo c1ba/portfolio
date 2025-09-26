@@ -5,3 +5,11 @@
   border-radius: cinematicCardConfig.$border-radius;
   position: absolute;
 }
+
+.cardBackground {
+  border-radius: cinematicCardConfig.$border-radius;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #2f2f2f;
+}

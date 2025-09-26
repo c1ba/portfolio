@@ -9,7 +9,7 @@ type CardFrameProps = {
   icons?: IconType[];
   enableHover?: boolean;
   className?: string;
-  animations?: string;
+  enableStartFade?: boolean;
 };
 
 const CardFrame = ({
@@ -18,7 +18,7 @@ const CardFrame = ({
   icons,
   enableHover = true,
   className,
-  animations,
+  enableStartFade = true,
   children,
 }: PropsWithChildren<CardFrameProps>) => {
   const classNames = [
@@ -39,6 +39,8 @@ const CardFrame = ({
   const Content = ({className}: {className?: string}) => {
     return (
       <div className={className}>
+        <div className={styles.glass} />
+        {enableStartFade && <div className={styles.cardCover} />}
         {title && <p className={styles.title}>{title}</p>}
         {icons && (
           <div className={styles.iconsContainer}>
@@ -47,7 +49,6 @@ const CardFrame = ({
             ))}
           </div>
         )}
-        <div className={styles.glass} />
         <div className={foregroundClassNames} />
         {children}
       </div>
