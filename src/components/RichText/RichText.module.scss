@@ -5,3 +5,13 @@
     padding: 0 25px;
   }
 }
+
+.displayHorizontal {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  p:first-child {
+    margin-right: 5px;
+  }
+}

@@ -34,3 +34,10 @@ export type ColumnSpan = Partial<{
     symmetric?: boolean;
   };
 }>;
+
+export type IconSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+
+export type Icon = {
+  default: string;
+  variant?: string;
+};

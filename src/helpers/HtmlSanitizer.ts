@@ -13,6 +13,7 @@ const INITIALLY_ALLOWED_TAGS: HTMLTag[] = [
   'li',
   'ul',
   'ol',
+  'div',
 ];
 
 const WHITESPACE_CHARACTERS = {
@@ -37,6 +38,7 @@ const WHITESPACE_CHARACTERS = {
 
 class HtmlSanitizer {
   private html: string;
+  private allowedTags: HTMLTag[] = INITIALLY_ALLOWED_TAGS;
 
   constructor(
     html: string,
@@ -51,13 +53,10 @@ class HtmlSanitizer {
       this.html,
       WHITESPACE_CHARACTERS,
     );
-    const exceptedTags = [
-      ...INITIALLY_ALLOWED_TAGS,
-      ...(options?.allowedTags || []),
-    ];
+    this.allowedTags = [...this.allowedTags, ...(options?.allowedTags || [])];
     const removableTags = HtmlSanitizer.getRemovableTags(
       this.html,
-      exceptedTags,
+      this.allowedTags,
     );
     this.html = HtmlSanitizer.removeTags(this.html, removableTags);
     return this;
@@ -75,12 +74,12 @@ class HtmlSanitizer {
     return parsedHtml;
   }
 
-  // Search all tags in the HTML snippet by closing tags.
+  // Search all tags in the HTML snippet by closing tags and void tags.
   // Get rid of duplicates and excepted tags.
   private static getRemovableTags(html: string, exceptedTags: HTMLTag[] = []) {
     const closingTags = Array.from(
-      new Set([...html.matchAll(/(?:<\/(.+)>)/gi)]),
-    ).map((match) => match[1]) as HTMLTag[];
+      new Set([...html.matchAll(/(?:<\/(\w+?)>)|(?:<(\w+?)(?:.[^>]+?\/)>)/gi)]),
+    ).map((match) => match[2] || match[1]) as HTMLTag[];
     return closingTags.filter(
       (tag) => !exceptedTags.some((exceptedTag) => exceptedTag === tag),
     );
@@ -90,7 +89,7 @@ class HtmlSanitizer {
     let parsedHtml = html;
     tags.forEach((tag) => {
       const regex = new RegExp(
-        `(?:<${tag}(?:.|\n)+?)((.|\n)+?)(?:\/${tag}>)`,
+        `(?:<(${tag})(?:.|\n)*?>)((.|\n)*?)(?:<\/\\1>)`,
         'gi',
       );
       parsedHtml = parsedHtml.replace(regex, '');

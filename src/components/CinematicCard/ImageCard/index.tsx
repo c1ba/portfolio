@@ -3,12 +3,13 @@ import {StrapiImage} from '@/utils/cms/types';
 import Image from 'next/image';
 import styles from './Card.module.scss';
 import CardFrame from '../CardFrame';
+import {Icon} from '@/app/theme/types';
 
 type ImageCardProps = {
   title: string;
   url?: string;
   backgroundImage: StrapiImage | undefined;
-  icons?: {default: string; variant?: string}[];
+  icons?: Icon[];
   className?: string;
   animations?: string;
 };

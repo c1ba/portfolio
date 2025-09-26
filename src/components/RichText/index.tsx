@@ -1,6 +1,11 @@
-import {ColumnSpan} from '@/app/theme/types';
+import {ColumnSpan, IconSize} from '@/app/theme/types';
 import styles from './RichText.module.scss';
 import HtmlSanitizer from '@/helpers/HtmlSanitizer';
+import {collectIcons} from '@/app/theme/utils/icons';
+import client from '@/utils/cms/client';
+import IconWithTooltip from '../Icon/IconWithTooltip';
+import {generateIcons} from './renderUtils';
+import processHtml from './processHtml';
 
 type RichTextProps = {
   id?: string;
@@ -10,17 +15,19 @@ type RichTextProps = {
   className?: string;
 };
 
-const RichText = ({id, content, className, ...props}: RichTextProps) => {
+const RichText = async ({id, content, className, ...props}: RichTextProps) => {
   const classNames = [styles.richText, className].filter(Boolean).join(' ');
-  const sanitizedHtml = new HtmlSanitizer(content).getHtml();
+  const parsedHtml = await processHtml(content);
 
   return (
-    <div
-      className={classNames}
-      id={id}
-      dangerouslySetInnerHTML={{__html: sanitizedHtml}}
-      {...props}
-    />
+    <>
+      <div
+        className={classNames}
+        id={id}
+        dangerouslySetInnerHTML={{__html: parsedHtml}}
+        {...props}
+      />
+    </>
   );
 };
 

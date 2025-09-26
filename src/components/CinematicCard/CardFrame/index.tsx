@@ -1,11 +1,12 @@
 import Icon from '@/components/Icon/Icon';
 import styles from './CardFrame.module.scss';
-import React, {JSX, PropsWithChildren} from 'react';
+import React, {PropsWithChildren} from 'react';
+import {Icon as IconType} from '@/app/theme/types';
 
 type CardFrameProps = {
   title?: string;
   url?: string;
-  icons?: {default: string; variant?: string}[];
+  icons?: IconType[];
   enableHover?: boolean;
   className?: string;
   animations?: string;

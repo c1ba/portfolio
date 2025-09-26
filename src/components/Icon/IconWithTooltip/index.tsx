@@ -16,7 +16,9 @@ const IconWithTooltip = ({
   return (
     <div className={classNames}>
       <div className={styles.tooltip}>
-        <span>{label}</span>
+        <span>
+          <strong>{label}</strong>
+        </span>
       </div>
       <Icon label={label} src={src} size={size} />
     </div>

@@ -1,4 +1,3 @@
-import {ColumnSpan} from '@/app/theme/types';
 import GridItem from '@/components/Grid/GridItem';
 import GridContainer from '@/components//Grid/GridContainer';
 import RichTextComponent from '@/components/RichText';
