@@ -1,3 +1,4 @@
+import PageWrapper from '@/components/Page';
 import client from '@/utils/cms/client';
 import TEMPLATE_MAP, {QUERY_MAP, TemplateType} from '@/utils/cms/mapping';
 import {notFound} from 'next/navigation';
@@ -11,7 +12,7 @@ export async function generateStaticParams() {
   return slugs;
 }
 
-const PageGenerator = async ({params}: PageProps<'/[...slug]'>) => {
+const Page = async ({params}: PageProps<'/[...slug]'>) => {
   const {slug} = await params;
   const pageUrl = `/${slug.join('/')}`;
   const urls = await (await client).querySitewideURLs();
@@ -26,7 +27,11 @@ const PageGenerator = async ({params}: PageProps<'/[...slug]'>) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const pageData = await (await client).queryByURL<any>(pageUrl, query);
 
-  return <Template data={pageData} url={pageUrl} />;
+  return (
+    <PageWrapper url={pageUrl}>
+      <Template data={pageData} />
+    </PageWrapper>
+  );
 };
 
-export default PageGenerator;
+export default Page;

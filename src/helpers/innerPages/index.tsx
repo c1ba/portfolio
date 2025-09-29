@@ -25,7 +25,7 @@ export const mapInnerPages = (pages: StrapiInnerPages) => {
     return (
       <GridItem key={`${templateId}-${index}`}>
         <section id={data.URL.replace('/', '')}>
-          <Template data={data} isInnerPage={true} />
+          <Template data={data} />
         </section>
       </GridItem>
     );

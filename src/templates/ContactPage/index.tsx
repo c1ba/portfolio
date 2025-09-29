@@ -1,5 +1,3 @@
-import TemplateContainer from '@/components/TemplateContainer';
-
 type PageProps = {
   Hero: {
     Heading: string;
@@ -9,14 +7,10 @@ type PageProps = {
 
 type ContactPageProps = {
   data: PageProps;
-  isInnerPage?: boolean;
-  url?: string;
 };
 
-const ContactPage = ({data, isInnerPage, url}: ContactPageProps) => {
-  return (
-    <TemplateContainer isInnerPage={isInnerPage} url={url}></TemplateContainer>
-  );
+const ContactPage = ({data}: ContactPageProps) => {
+  return <></>;
 };
 
 export default ContactPage;

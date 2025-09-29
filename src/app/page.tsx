@@ -3,6 +3,7 @@ import query from '@/templates/HomePage/query';
 import HomePage from '@/templates/HomePage';
 import {StrapiHomePage} from '@/templates/HomePage/types';
 import {notFound} from 'next/navigation';
+import PageWrapper from '@/components/Page';
 
 const Page = async () => {
   const data = await (await client).querySinglePageProps<StrapiHomePage>(query);
@@ -10,7 +11,11 @@ const Page = async () => {
     notFound();
   }
 
-  return <HomePage data={data.homePage} />;
+  return (
+    <PageWrapper url="/">
+      <HomePage data={data.homePage} />
+    </PageWrapper>
+  );
 };
 
 export default Page;
