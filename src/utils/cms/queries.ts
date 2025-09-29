@@ -13,6 +13,31 @@ export const SITE_URLS = gql`
   }
 `;
 
+export const PAGE_METADATA = gql`
+  query PageMetadatas($url: String) {
+    ${TEMPLATE_TYPES.map(
+      (templateType) =>
+        `${templateType}s(filters: 
+          {
+            
+            URL: {
+              eq: $url
+            }
+          }) {
+          URL
+          PageMeta {
+            ...PageMetadata
+          }
+      }`,
+    )}
+    homePage {
+      PageMeta {
+        ...PageMetadata
+      }
+    }
+  }
+`;
+
 export const PROJECT_METAS = gql`
   query ProjectMetas {
     projectMetas {

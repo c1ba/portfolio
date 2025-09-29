@@ -26,7 +26,7 @@ const PageGenerator = async ({params}: PageProps<'/[...slug]'>) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const pageData = await (await client).queryByURL<any>(pageUrl, query);
 
-  return <Template data={pageData} />;
+  return <Template data={pageData} url={pageUrl} />;
 };
 
 export default PageGenerator;

@@ -1,7 +1,6 @@
 import AboutPage from '@/templates/AboutPage';
 import aboutPageQuery from '@/templates/AboutPage/query';
 import ContactPage from '@/templates/ContactPage';
-import homePageQuery from '@/templates/HomePage/query';
 import {JSX} from 'react';
 
 const MAP_KEYS = ['aboutPage', 'contactPage'] as const;
@@ -18,7 +17,6 @@ const TEMPLATE_MAP: {
 export const QUERY_MAP = {
   aboutPage: aboutPageQuery,
   contactPage: aboutPageQuery,
-  homePage: homePageQuery,
 };
 
 export const TEMPLATE_TYPES = Object.keys(TEMPLATE_MAP);

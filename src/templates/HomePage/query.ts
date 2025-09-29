@@ -9,6 +9,7 @@ const query = gql`
       InnerPages {
         ... on ComponentInnerPagesInnerAboutPage {
           about_page {
+            URL
             ...StrapiAboutPage
           }
         }

@@ -13,6 +13,30 @@ export type StrapiImage = {
   alternativeText: string;
 };
 
+export type StrapiPageMeta = {
+  Title: string;
+  Description: string;
+  Robots?: string;
+  CanonicalTag?: string;
+  OgUrl?: string;
+  OgTitle?: string;
+  OgDescription?: string;
+  OgType?: string;
+  OgImage?: StrapiImage;
+};
+
+export type SitewideMetas = {
+  [key: string]:
+    | {
+        URL?: string;
+        PageMeta: StrapiPageMeta;
+      }[]
+    | {
+        URL?: string;
+        PageMeta: StrapiPageMeta;
+      };
+};
+
 export type StrapiHero = {
   Heading: string;
   Subheading?: string;

@@ -6,8 +6,14 @@ import {
   TypedDocumentNode,
 } from '@apollo/client';
 import {SetContextLink} from '@apollo/client/link/context';
-import {StrapiIcon, StrapiProjectMeta, TemplateURLs} from './types';
-import {ICONS, PROJECT_METAS, SITE_URLS} from './queries';
+import {
+  SitewideMetas,
+  StrapiIcon,
+  StrapiPageMeta,
+  StrapiProjectMeta,
+  TemplateURLs,
+} from './types';
+import {ICONS, PAGE_METADATA, PROJECT_METAS, SITE_URLS} from './queries';
 import {OperationVariables} from '@apollo/client';
 import {createFragmentRegistry} from '@apollo/client/cache';
 import {fragment as HERO} from '@/components/Hero/query';
@@ -123,6 +129,51 @@ class CMSClient {
       return urls;
     } catch (err) {
       console.error('[CMSClient] Error when querying sitewide URLs: ', err);
+      return [];
+    }
+  }
+
+  async querySitewidePageMeta(filters?: {
+    disablePageGeneration?: boolean;
+    url?: string;
+  }) {
+    try {
+      const {data, error} = await this.client.query<SitewideMetas>({
+        query: PAGE_METADATA,
+        variables: {
+          ...filters,
+        },
+      });
+
+      if (error) {
+        throw new Error(`[${error.name}]: ${error.message}`);
+      }
+
+      if (!data) {
+        return [];
+      }
+      const sitewideMetas: (StrapiPageMeta & {URL: string})[] = [];
+
+      Object.values(data).forEach((cmsData) => {
+        if (!Array.isArray(cmsData)) {
+          sitewideMetas.push({
+            ...cmsData.PageMeta,
+            URL: cmsData.URL || '/',
+          });
+          return;
+        }
+
+        sitewideMetas.push(
+          ...cmsData.map((pageData) => ({
+            ...pageData.PageMeta,
+            URL: pageData.URL || '/',
+          })),
+        );
+      });
+
+      return sitewideMetas;
+    } catch (err) {
+      console.error('[CMSClient] Error when Sitewide Pages Metadata: ', err);
       return [];
     }
   }

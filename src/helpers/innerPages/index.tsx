@@ -16,13 +16,16 @@ export const mapInnerPages = (pages: StrapiInnerPages) => {
     const templateId = key.replace('_', '-');
 
     if (!Template) {
-      throw new Error('Template not found.');
+      console.warn(
+        `Template associated with key ${key} was not found, hence the page won't be rendered.`,
+      );
+      return <></>;
     }
 
     return (
       <GridItem key={`${templateId}-${index}`}>
-        <section id={templateId}>
-          <Template data={data} />
+        <section id={data.URL.replace('/', '')}>
+          <Template data={data} isInnerPage={true} />
         </section>
       </GridItem>
     );
