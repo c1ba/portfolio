@@ -1,4 +1,5 @@
 import GridItem from '@/components/Grid/GridItem';
+import Section from '@/components/Section';
 import TEMPLATE_MAP from '@/utils/cms/mapping';
 import {StrapiInnerPages} from '@/utils/cms/types';
 import {snakeCase} from '@/utils/stringUtils';
@@ -24,9 +25,9 @@ export const mapInnerPages = (pages: StrapiInnerPages) => {
 
     return (
       <GridItem key={`${templateId}-${index}`}>
-        <section id={data.URL.replace('/', '')}>
+        <Section id={data.URL.replace('/', '')}>
           <Template data={data} />
-        </section>
+        </Section>
       </GridItem>
     );
   });

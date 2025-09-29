@@ -1,7 +1,10 @@
 @use '../../../app/theme/' as *;
 
 .heroContainer {
-  margin: 64px 0;
+  margin-top: 32px;
+  @include media-query-desktop {
+    margin-top: 64px;
+  }
 }
 
 .headingContainer {

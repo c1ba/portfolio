@@ -1,0 +1,10 @@
+@use '../../app/theme/' as *;
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  @include media-query-desktop {
+    gap: 64px;
+  }
+}

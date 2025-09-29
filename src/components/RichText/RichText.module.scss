@@ -4,6 +4,11 @@
   @include media-query-mobile {
     padding: 0 25px;
   }
+
+  ul,
+  ol {
+    padding-left: 20px;
+  }
 }
 
 .displayHorizontal {
@@ -13,5 +18,9 @@
 
   p:first-child {
     margin-right: 5px;
+  }
+
+  @include media-query-mobile {
+    flex-wrap: wrap;
   }
 }

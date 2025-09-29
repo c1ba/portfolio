@@ -6,6 +6,7 @@ import {ColumnSpan} from '@/app/theme/types';
 import React from 'react';
 import {ForwardedRef} from '@/utils/types';
 import {GeneralHeroProps} from '../types';
+import Section from '@/components/Section';
 
 const COLUMN_SPAN_CONFIG: ColumnSpan = {
   desktop: {
@@ -28,8 +29,7 @@ const GeneralHero = ({
   thumbnail,
   enableWhiteBackground,
   className,
-  ref,
-}: ForwardedRef<GeneralHeroProps, HTMLElement>) => {
+}: GeneralHeroProps) => {
   const sectionClassNames = [
     enableWhiteBackground ? styles.whiteBackground : '',
   ]
@@ -41,7 +41,7 @@ const GeneralHero = ({
     .join(' ');
   return (
     <GridItem>
-      <section className={sectionClassNames} ref={ref}>
+      <Section className={sectionClassNames}>
         <GridContainer>
           <GridItem
             columnSpan={COLUMN_SPAN_CONFIG}
@@ -65,7 +65,7 @@ const GeneralHero = ({
             )}
           </GridItem>
         </GridContainer>
-      </section>
+      </Section>
     </GridItem>
   );
 };

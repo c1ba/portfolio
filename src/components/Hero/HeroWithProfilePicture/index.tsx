@@ -5,6 +5,7 @@ import {StrapiImage} from '@/utils/cms/types';
 import styles from './HeroWithProfilePicture.module.scss';
 import PictureFrame from './PictureFrame';
 import RichText from '@/components/RichText';
+import Section from '@/components/Section';
 
 export type HeroWithProfilePictureProps = {
   heading: string;
@@ -34,7 +35,7 @@ const HeroWithProfilePicture = ({
 }: HeroWithProfilePictureProps) => {
   return (
     <GridItem>
-      <section className={styles.heroContainer}>
+      <Section className={styles.heroContainer}>
         <GridContainer>
           <GridItem columnSpan={COLUMN_SPAN_CONFIG}>
             <GridContainer>
@@ -71,7 +72,7 @@ const HeroWithProfilePicture = ({
             </GridContainer>
           </GridItem>
         </GridContainer>
-      </section>
+      </Section>
     </GridItem>
   );
 };
