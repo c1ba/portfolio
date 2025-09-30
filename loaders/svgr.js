@@ -69,7 +69,12 @@ module.exports = function (source) {
     Promise.all(reactSvgs)
       .then((svgs) => {
         const newSource = svgs.join(' ') + source;
-        callback(null, newSource);
+        callback(
+          null,
+          !newSource.includes('use client')
+            ? newSource
+            : `'use client'` + newSource.replace(`'use client'`, ''),
+        );
       })
       .catch((err) => {
         console.error(err);

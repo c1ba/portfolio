@@ -10,6 +10,7 @@ type CardFrameProps = {
   enableHover?: boolean;
   className?: string;
   enableStartFade?: boolean;
+  ref?: React.RefObject<HTMLDivElement | HTMLAnchorElement | null>;
 };
 
 const CardFrame = ({
@@ -19,6 +20,7 @@ const CardFrame = ({
   enableHover = true,
   className,
   enableStartFade = true,
+  ref,
   children,
 }: PropsWithChildren<CardFrameProps>) => {
   const classNames = [
@@ -36,9 +38,15 @@ const CardFrame = ({
     .filter(Boolean)
     .join(' ');
 
-  const Content = ({className}: {className?: string}) => {
+  const Content = ({
+    className,
+    contentRef,
+  }: {
+    className?: string;
+    contentRef?: React.RefObject<HTMLDivElement>;
+  }) => {
     return (
-      <div className={className}>
+      <div className={className} ref={contentRef}>
         <div className={styles.glass} />
         {enableStartFade && <div className={styles.cardCover} />}
         {title && <p className={styles.title}>{title}</p>}
@@ -55,11 +63,19 @@ const CardFrame = ({
     );
   };
   return url ? (
-    <a href={url} target="_blank" className={classNames}>
+    <a
+      href={url}
+      target="_blank"
+      className={classNames}
+      ref={ref as React.RefObject<HTMLAnchorElement>}
+    >
       <Content />
     </a>
   ) : (
-    <Content className={classNames} />
+    <Content
+      className={classNames}
+      contentRef={ref as React.RefObject<HTMLDivElement>}
+    />
   );
 };
 

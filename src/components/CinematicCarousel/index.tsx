@@ -7,6 +7,7 @@ import styles from './CinematicCarousel.module.scss';
 import animations from './CarouselAnimations.module.scss';
 import ImageCard from '@/components/CinematicCard/ImageCard';
 import FakeCard from '@/components/CinematicCard/FakeCard';
+import IntersectorObserverWrapper from '@/helpers/IntersectorObserverWrapper';
 
 const ANIMATION_TIME_IN_SECONDS = 0.7;
 
@@ -64,17 +65,31 @@ const CinematicCarousel = ({cards}: CinematicCardsProps) => {
               .filter((_, idx) => idx === currentCardIdx)
               .map((card, index) => {
                 return (
-                  <ImageCard
+                  <IntersectorObserverWrapper
+                    threshold={0.5}
                     key={`card-${index}`}
-                    title={card.title}
-                    url={card.url}
-                    backgroundImage={card.backgroundImage}
-                    icons={card.icons}
-                    className={
-                      isTransitioning ? animations[`slideOut${direction}4`] : ''
-                    }
-                    enableStartFade={!isTransitioning}
-                  />
+                  >
+                    {(
+                      ref: React.RefObject<
+                        HTMLAnchorElement | HTMLDivElement | null
+                      >,
+                      inView,
+                    ) => (
+                      <ImageCard
+                        ref={ref}
+                        title={card.title}
+                        url={card.url}
+                        backgroundImage={card.backgroundImage}
+                        icons={card.icons}
+                        className={`${
+                          isTransitioning
+                            ? animations[`slideOut${direction}4`]
+                            : ''
+                        } ${styles.fadedIn}${inView ? ` ${styles.visible}` : ''}`}
+                        enableStartFade={!isTransitioning}
+                      />
+                    )}
+                  </IntersectorObserverWrapper>
                 );
               })}
           </GridItem>
@@ -90,16 +105,24 @@ const CinematicCarousel = ({cards}: CinematicCardsProps) => {
               tabletLandscape: {range: 1, symmetric: true},
             }}
           >
-            <FakeCard
-              size={0.75}
-              className={
-                isTransitioning && direction
-                  ? direction === 'Left'
-                    ? animations[`slideIn${direction}3`]
-                    : animations[`slideOut${direction}3`]
-                  : ''
-              }
-            />
+            <IntersectorObserverWrapper threshold={0.5}>
+              {(
+                ref: React.RefObject<HTMLAnchorElement | HTMLDivElement | null>,
+                inView,
+              ) => (
+                <FakeCard
+                  ref={ref}
+                  size={0.75}
+                  className={`${
+                    isTransitioning && direction
+                      ? direction === 'Left'
+                        ? animations[`slideIn${direction}3`]
+                        : animations[`slideOut${direction}3`]
+                      : ''
+                  } ${styles.fadedIn05}${inView ? ` ${styles.visible}` : ''}`}
+                />
+              )}
+            </IntersectorObserverWrapper>
           </GridItem>
           <GridItem
             className={`${styles.gridRow4} ${animations.zIndex2} ${styles.setRight} ${
@@ -112,16 +135,24 @@ const CinematicCarousel = ({cards}: CinematicCardsProps) => {
               tabletLandscape: {range: 1, symmetric: true},
             }}
           >
-            <FakeCard
-              size={0.75}
-              className={
-                isTransitioning && direction
-                  ? direction === 'Right'
-                    ? animations[`slideIn${direction}3`]
-                    : animations[`slideOut${direction}3`]
-                  : ''
-              }
-            />
+            <IntersectorObserverWrapper threshold={0.5}>
+              {(
+                ref: React.RefObject<HTMLAnchorElement | HTMLDivElement | null>,
+                inView,
+              ) => (
+                <FakeCard
+                  ref={ref}
+                  size={0.75}
+                  className={`${
+                    isTransitioning && direction
+                      ? direction === 'Right'
+                        ? animations[`slideIn${direction}3`]
+                        : animations[`slideOut${direction}3`]
+                      : ''
+                  } ${styles.fadedIn05}${inView ? ` ${styles.visible}` : ''}`}
+                />
+              )}
+            </IntersectorObserverWrapper>
           </GridItem>
           {/* Level 2 Fake cards */}
           <GridItem
@@ -135,16 +166,24 @@ const CinematicCarousel = ({cards}: CinematicCardsProps) => {
               tabletLandscape: {range: 1, symmetric: true},
             }}
           >
-            <FakeCard
-              size={0.5}
-              className={
-                isTransitioning && direction
-                  ? direction === 'Left'
-                    ? animations[`slideIn${direction}2`]
-                    : animations[`slideOut${direction}2`]
-                  : ''
-              }
-            />
+            <IntersectorObserverWrapper threshold={0.5}>
+              {(
+                ref: React.RefObject<HTMLAnchorElement | HTMLDivElement | null>,
+                inView,
+              ) => (
+                <FakeCard
+                  ref={ref}
+                  size={0.5}
+                  className={`${
+                    isTransitioning && direction
+                      ? direction === 'Left'
+                        ? animations[`slideIn${direction}2`]
+                        : animations[`slideOut${direction}2`]
+                      : ''
+                  } ${styles.fadedIn07}${inView ? ` ${styles.visible}` : ''}`}
+                />
+              )}
+            </IntersectorObserverWrapper>
           </GridItem>
           <GridItem
             className={`${styles.gridRow5} ${animations.zIndex1} ${styles.setRight} ${
@@ -157,16 +196,24 @@ const CinematicCarousel = ({cards}: CinematicCardsProps) => {
               tabletLandscape: {range: 1, symmetric: true},
             }}
           >
-            <FakeCard
-              size={0.5}
-              className={
-                isTransitioning && direction
-                  ? direction === 'Right'
-                    ? animations[`slideIn${direction}2`]
-                    : animations[`slideOut${direction}2`]
-                  : ''
-              }
-            />
+            <IntersectorObserverWrapper threshold={0.5}>
+              {(
+                ref: React.RefObject<HTMLAnchorElement | HTMLDivElement | null>,
+                inView,
+              ) => (
+                <FakeCard
+                  ref={ref}
+                  size={0.5}
+                  className={`${
+                    isTransitioning && direction
+                      ? direction === 'Right'
+                        ? animations[`slideIn${direction}2`]
+                        : animations[`slideOut${direction}2`]
+                      : ''
+                  } ${styles.fadedIn07}${inView ? ` ${styles.visible}` : ''}`}
+                />
+              )}
+            </IntersectorObserverWrapper>
           </GridItem>
           {/* Level 3 Fake Card */}
           <GridItem
@@ -174,16 +221,24 @@ const CinematicCarousel = ({cards}: CinematicCardsProps) => {
               isTransitioning ? animations.setZIndex1 : undefined
             }`}
           >
-            <FakeCard
-              size={0.5}
-              className={
-                isTransitioning
-                  ? animations[
-                      `backCardAnim${direction === 'Right' ? 'Left' : 'Right'}`
-                    ]
-                  : ''
-              }
-            />
+            <IntersectorObserverWrapper threshold={1}>
+              {(
+                ref: React.RefObject<HTMLAnchorElement | HTMLDivElement | null>,
+                inView,
+              ) => (
+                <FakeCard
+                  ref={ref}
+                  size={0.5}
+                  className={`${
+                    isTransitioning
+                      ? animations[
+                          `backCardAnim${direction === 'Right' ? 'Left' : 'Right'}`
+                        ]
+                      : ''
+                  } ${styles.fadedIn07}${inView ? ` ${styles.visible}` : ''}`}
+                />
+              )}
+            </IntersectorObserverWrapper>
           </GridItem>
         </GridContainer>
       </div>

@@ -24,7 +24,7 @@ const mapBlocks = (blocks: ({__typename: string} & any)[]) => {
         );
         return undefined;
       }
-      delete props.__typename;
+      // delete props.__typename;
       return <Component key={`flexible-component-${index}`} {...props} />;
     })
     .filter(Boolean);

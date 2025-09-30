@@ -12,6 +12,7 @@ type ImageCardProps = {
   icons?: Icon[];
   className?: string;
   enableStartFade?: boolean;
+  ref?: React.RefObject<HTMLAnchorElement | HTMLDivElement | null>;
 };
 
 const ImageCard = ({
@@ -21,6 +22,7 @@ const ImageCard = ({
   icons,
   className,
   enableStartFade,
+  ref,
 }: ImageCardProps) => {
   const image = processStrapiImage(backgroundImage);
   return (
@@ -30,6 +32,7 @@ const ImageCard = ({
       className={className}
       enableStartFade={enableStartFade}
       icons={icons}
+      ref={ref}
     >
       {image ? (
         <Image
