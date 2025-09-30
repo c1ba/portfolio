@@ -4,6 +4,7 @@
 .imageCard {
   border-radius: cinematicCardConfig.$border-radius;
   position: absolute;
+  z-index: 1;
 }
 
 .cardBackground {
@@ -12,4 +13,5 @@
   width: 100%;
   height: 100%;
   background: #2f2f2f;
+  z-index: 0;
 }

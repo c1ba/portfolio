@@ -34,16 +34,15 @@ const ImageCard = ({
       icons={icons}
       ref={ref}
     >
-      {image ? (
+      {image && (
         <Image
           className={styles.imageCard}
           src={image.url}
           alt={image.alternativeText || 'Ïmage card'}
           fill={true}
         />
-      ) : (
-        <div className={styles.cardBackground} />
       )}
+      <div className={styles.cardBackground} />
     </CardFrame>
   );
 };
