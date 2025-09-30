@@ -1,19 +1,19 @@
 import GridItem from '../Grid/GridItem';
 import GridContainer from '../Grid/GridContainer';
 import styles from './BackgroundPattern.module.scss';
-import BackgroundShape from '@/assets/Shape.svg';
+import FadingBackgroundPattern from './FadingBackgroundPattern';
 
 const BackgroundPattern = () => {
   return (
     <div className={styles.patternContainer}>
       <GridContainer>
         <GridItem className={styles.gridPositionFirst}>
-          <BackgroundShape />
+          <FadingBackgroundPattern />
         </GridItem>
         <GridItem
           className={`${styles.gridPositionLast} ${styles.flipHorizontal} ${styles.overlap}`}
         >
-          <BackgroundShape />
+          <FadingBackgroundPattern />
         </GridItem>
       </GridContainer>
     </div>

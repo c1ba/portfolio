@@ -1,7 +1,7 @@
 'use client';
 import React, {useEffect, useRef, useState} from 'react';
 
-type IntersectorObserverProps<T extends HTMLElement> = {
+type IntersectorObserverProps<T extends Element> = {
   threshold?: number;
   children: (
     ref: React.RefObject<T | null>,
@@ -9,7 +9,7 @@ type IntersectorObserverProps<T extends HTMLElement> = {
   ) => React.ReactNode;
 };
 
-function IntersectorObserverWrapper<T extends HTMLElement>({
+function IntersectorObserverWrapper<T extends Element>({
   threshold,
   children,
 }: IntersectorObserverProps<T>) {
@@ -38,7 +38,7 @@ function IntersectorObserverWrapper<T extends HTMLElement>({
     return () => {
       if (ref.current) observer.unobserve(ref.current);
     };
-  }, []);
+  }, [ref]);
 
   return children(ref, isVisible);
 }

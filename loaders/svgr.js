@@ -42,7 +42,10 @@ module.exports = function (source) {
             // Take the opening svg tag, where the closing arrow is a capturing group and process it.
             // Then replace the original tag with the processed one.
             const svgTag = svgContent.match(/(?:<svg(?:.|\n)+?)(>)/);
-            const processedSvgTag = svgTag[0].replace(svgTag[1], '{...props}>');
+            const processedSvgTag = svgTag[0].replace(
+              svgTag[1],
+              `ref={ref} className={className || ''} {...props}>`,
+            );
             const processedSvgContent = svgContent.replace(
               svgTag[0],
               processedSvgTag,
@@ -50,8 +53,8 @@ module.exports = function (source) {
 
             // Export as React component
             const code = `
-            import { SVGProps } from "react";
-            const ${componentName} = (props: SVGProps<SVGSVGElement>) => {
+            import { SVGProps, RefObject } from "react";
+            const ${componentName} = ({props = {}, ref, className}: {props?: SVGProps<SVGSVGElement>; ref?: RefObject<SVGSVGElement | null>; className?: string}) => {
                 return ${processedSvgContent};
             };
         `;

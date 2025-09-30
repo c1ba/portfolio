@@ -1,25 +1,25 @@
-.fadedIn {
+@mixin fadedIn($animation-time, $translate-y) {
   opacity: 0;
-  transform: translateY(-30px);
+  transform: translateY($translate-y);
   transition:
-    opacity 0.3s ease-in-out,
-    transform 0.3s ease-in-out;
+    opacity $animation-time ease-in-out,
+    transform $animation-time ease-in-out;
+}
+
+.fadedIn {
+  @include fadedIn(0.3s, -30px);
 }
 
 .fadedIn05 {
-  opacity: 0;
-  transform: translateY(-30px);
-  transition:
-    opacity 0.5s ease-in-out,
-    transform 0.5s ease-in-out;
+  @include fadedIn(0.5s, -30px);
 }
 
 .fadedIn07 {
-  opacity: 0;
-  transform: translateY(-30px);
-  transition:
-    opacity 0.7s ease-in-out,
-    transform 0.7s ease-in-out;
+  @include fadedIn(0.7s, -30px);
+}
+
+.fadedIn1 {
+  @include fadedIn(1s, -30px);
 }
 
 .visible {
