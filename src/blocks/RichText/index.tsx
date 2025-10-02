@@ -1,6 +1,6 @@
 import GridItem from '@/components/Grid/GridItem';
 import GridContainer from '@/components//Grid/GridContainer';
-import RichTextComponent from '@/components/RichText';
+import RichTextComponent from '@/components/async/RichText';
 import {COLUMN_SPAN_CONFIG} from '@/app/theme/common';
 import Section from '@/components/Section';
 

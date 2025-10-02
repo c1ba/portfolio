@@ -1,5 +1,7 @@
-import RichTextWrapper from './RichTextWrapper';
-import processHtml from './processHtml';
+'use client';
+import IntersectorObserverWrapper from '@/helpers/IntersectorObserverWrapper';
+import styles from './RichText.module.scss';
+import React from 'react';
 
 type RichTextProps = {
   id?: string;
@@ -7,11 +9,20 @@ type RichTextProps = {
   className?: string;
 };
 
-const RichText = async ({id, content, className, ...props}: RichTextProps) => {
-  const parsedHtml = await processHtml(content);
-
+const RichText = ({id, content, className, ...props}: RichTextProps) => {
+  const classNames = [styles.richText, className].filter(Boolean).join(' ');
   return (
-    <RichTextWrapper content={parsedHtml} className={className} {...props} />
+    <IntersectorObserverWrapper>
+      {(ref: React.RefObject<HTMLDivElement | null>, inView) => (
+        <div
+          ref={ref}
+          className={`${classNames} ${styles.fadedIn}${inView ? ` ${styles.visible}` : ''}`}
+          id={id}
+          dangerouslySetInnerHTML={{__html: content}}
+          {...props}
+        />
+      )}
+    </IntersectorObserverWrapper>
   );
 };
 

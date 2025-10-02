@@ -4,7 +4,7 @@ import {ColumnSpan} from '@/app/theme/types';
 import {StrapiImage} from '@/utils/cms/types';
 import styles from './HeroWithProfilePicture.module.scss';
 import PictureFrame from './PictureFrame';
-import RichText from '@/components/RichText';
+import RichText from '@/components/async/RichText';
 import Section from '@/components/Section';
 
 export type HeroWithProfilePictureProps = {

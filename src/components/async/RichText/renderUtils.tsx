@@ -3,7 +3,7 @@ import {collectIcons} from '@/app/theme/utils/icons';
 import client from '@/utils/cms/client';
 import IconWithTooltip from '@/components/Icon/IconWithTooltip';
 import {ICON_PLACEHOLDER_REGEX} from './consts';
-import Icon from '../Icon/Icon';
+import Icon from '@/components/Icon/Icon';
 
 export const generateIcons = async (html: string) => {
   const iconPlaceholders = html.matchAll(ICON_PLACEHOLDER_REGEX);

@@ -16,9 +16,6 @@ import {
 import {ICONS, PAGE_METADATA, PROJECT_METAS, SITE_URLS} from './queries';
 import {OperationVariables} from '@apollo/client';
 import {createFragmentRegistry} from '@apollo/client/cache';
-import {fragment as HERO} from '@/components/Hero/query';
-import {THUMBNAIL} from './fragments';
-import {fragment as INNER_ABOUT_PAGE} from '@/templates/AboutPage/query';
 import {getRecursivePaths, PROJECT_PATH} from '../fileUtils';
 
 type PageData = {url: string; pageType: string};
@@ -190,6 +187,7 @@ class CMSClient {
         throw new Error(`[${error.name}]: ${error.message}`);
       }
 
+      console.log(data);
       return data;
     } catch (err) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any

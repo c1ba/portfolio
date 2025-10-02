@@ -1,0 +1,15 @@
+@use '../../../app/theme/' as *;
+
+.displayHorizontal {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  p:first-child {
+    margin-right: 5px;
+  }
+
+  @include media-query-mobile {
+    flex-wrap: wrap;
+  }
+}

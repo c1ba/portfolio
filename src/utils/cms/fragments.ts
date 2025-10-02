@@ -24,3 +24,16 @@ export const PAGE_METADATA = gql`
     }
   }
 `;
+
+export const ICON = gql`
+  fragment Icon on Icon {
+    Code
+    Label
+    Default {
+      url
+    }
+    Variant {
+      url
+    }
+  }
+`;

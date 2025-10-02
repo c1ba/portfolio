@@ -58,14 +58,7 @@ export const PROJECT_METAS = gql`
 export const ICONS = gql`
   query Icons {
     icons {
-      Code
-      Label
-      Default {
-        url
-      }
-      Variant {
-        url
-      }
+      ...Icon
     }
   }
 `;

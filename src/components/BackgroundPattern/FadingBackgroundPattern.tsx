@@ -2,10 +2,14 @@
 import styles from './BackgroundPattern.module.scss';
 import BackgroundShape from '@/assets/Shape.svg';
 import IntersectorObserverWrapper from '@/helpers/IntersectorObserverWrapper';
+import useInitialScroll from '@/helpers/useInitialScroll';
 import React from 'react';
 
 const FadingBackgroundPattern = () => {
-  return (
+  const initialScroll = useInitialScroll();
+  return !initialScroll ? (
+    <></>
+  ) : (
     <IntersectorObserverWrapper threshold={0.32}>
       {(ref: React.RefObject<SVGSVGElement | null>, inView) => (
         <BackgroundShape

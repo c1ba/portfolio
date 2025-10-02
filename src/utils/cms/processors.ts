@@ -17,6 +17,15 @@ export const processStrapiImage = (image: StrapiImage | undefined) =>
         url: processAssetUrl(image.url) as string,
       };
 
+export const processStrapiIcon = (icon: StrapiIcon) => ({
+  code: icon.Code,
+  label: icon.Label,
+  default: processAssetUrl(icon.Default.url) as string,
+  variant: !!icon.Variant
+    ? processAssetUrl(icon.Variant.url)
+    : processAssetUrl(icon.Default.url),
+});
+
 export const processStrapiIcons = (icons: StrapiIcon[]) => {
   return Object.fromEntries(
     icons.map((icon) => {
