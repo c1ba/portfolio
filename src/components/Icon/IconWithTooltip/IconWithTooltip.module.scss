@@ -1,9 +1,11 @@
+@use '../../../app/theme/' as *;
+
 .tooltip {
   position: absolute;
   z-index: 1;
   top: -16px;
   left: 65%;
-  background-color: #ffffff;
+  background-color: $pure-white;
   color: #000000;
 
   border-radius: 4px;

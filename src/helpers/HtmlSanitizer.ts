@@ -85,6 +85,7 @@ class HtmlSanitizer {
     );
   }
 
+  // TODO: Find a better sanitization way so that it can work on nested tags as well
   private static removeTags(html: string, tags: HTMLTag[]) {
     let parsedHtml = html;
     tags.forEach((tag) => {

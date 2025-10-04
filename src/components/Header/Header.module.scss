@@ -19,18 +19,26 @@
   transition: max-height 0.3s ease-in-out;
 
   a {
-    color: #ffffff;
+    color: $pure-white;
     text-decoration: none;
     transition: color 0.3s ease-in-out;
 
     &:hover {
-      color: #6cd4eb;
+      color: $sky-blue;
+    }
+
+    @include theme-light {
+      color: $dark-blue;
     }
   }
 
   svg,
   img {
-    color: #ffffff;
+    color: $pure-white;
+
+    @include theme-light {
+      color: $dark-blue;
+    }
   }
 }
 
@@ -51,8 +59,8 @@
   width: 100%;
   height: 100%;
   border: {
-    left: solid 2px #ffffff;
-    right: solid 2px #ffffff;
+    left: solid 2px $pure-white;
+    right: solid 2px $pure-white;
   }
   padding: {
     left: 18px;
@@ -61,6 +69,10 @@
   transform: scaleX(0.03);
   transition: transform 0.3s ease-in-out;
   transition-delay: 0.155s;
+
+  @include theme-light {
+    border-color: $dark-blue;
+  }
 }
 
 .navVisible {

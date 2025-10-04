@@ -17,9 +17,13 @@
 .triangleBottomRight {
   width: 0;
   height: 0;
-  border-bottom: 50px solid #ffffff;
+  border-bottom: 50px solid $pure-white;
   border-left: 50px solid transparent;
   position: absolute;
+
+  @include theme-light {
+    border-color: $sky-blue;
+  }
 }
 
 @keyframes utza-utza {

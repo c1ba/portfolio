@@ -88,7 +88,7 @@ $button-size: 10px;
   outline: inherit;
 
   background-color: transparent;
-  border: solid 1px #ffffff;
+  border: solid 1px $pure-white;
   border-radius: 50%;
   width: $button-size;
   height: $button-size;
@@ -96,7 +96,7 @@ $button-size: 10px;
 
 .buttonActive {
   cursor: default;
-  background-color: #ffffff;
+  background-color: $pure-white;
   border: none;
   transition:
     background-color 0.3s ease-in-out,
@@ -111,6 +111,7 @@ $button-size: 10px;
   align-items: center;
   cursor: pointer;
   z-index: 9;
+  color: $pure-white;
 }
 
 .arrowNextButtonContainer {
@@ -125,7 +126,7 @@ $button-size: 10px;
   transition: color 0.3s ease-in-out;
   &:hover {
     animation-play-state: paused;
-    color: #6cd4eb;
+    color: $sky-blue;
   }
 }
 
@@ -141,6 +142,6 @@ $button-size: 10px;
   transition: color 0.3s ease-in-out;
   &:hover {
     animation-play-state: paused;
-    color: #6cd4eb;
+    color: $sky-blue;
   }
 }

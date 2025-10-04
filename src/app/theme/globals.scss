@@ -1,15 +1,16 @@
-@forward './fonts.scss';
+@use './fonts.scss' as *;
 @use './theme.scss' as *;
+@use './colors.scss' as *;
 
 :root {
-  --background: #ffffff;
-  --foreground: #001517;
+  --background: $pure-white;
+  --foreground: $dark-blue;
 }
 
 @include theme-dark {
   :root {
-    --background: #001517;
-    --foreground: #ededed;
+    --background: $dark-blue;
+    --foreground: $pure-white;
   }
 }
 
@@ -29,6 +30,12 @@ body {
 main {
   z-index: 1;
   position: absolute;
+}
+
+a {
+  color: $sky-blue;
+  transition: color 0.3s ease-in-out;
+  text-decoration: underline;
 }
 
 * {
