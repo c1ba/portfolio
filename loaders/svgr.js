@@ -4,7 +4,6 @@ module.exports = function (source) {
   // Get all the SVG import declarations. If none found, return source as is.
   const svgRegex = /(import \w+ from ('|").*.svg('|"))/gi;
   const matches = source.match(svgRegex);
-
   if (!matches) {
     return source;
   }
@@ -44,7 +43,7 @@ module.exports = function (source) {
             const svgTag = svgContent.match(/(?:<svg(?:.|\n)+?)(>)/);
             const processedSvgTag = svgTag[0].replace(
               svgTag[1],
-              `ref={ref} className={className || ''} {...props}>`,
+              ` ref={ref} className={className || ''} {...props}>`,
             );
             const processedSvgContent = svgContent.replace(
               svgTag[0],

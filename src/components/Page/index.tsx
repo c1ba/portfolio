@@ -14,7 +14,7 @@ const Page = ({url, children}: PropsWithChildren<PageProps>) => {
     <>
       <PageMetadata url={url} />
       <body>
-        <Header />
+        <Header url={url} />
         <main>
           <GridContainer className={styles.mainGridContainer}>
             {children}

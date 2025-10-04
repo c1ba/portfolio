@@ -1,0 +1,76 @@
+@mixin arrowAnim($direction, $duration) {
+  $animation-name: arrowAnim-#{$direction};
+  animation: $animation-name $duration infinite ease-in-out;
+}
+
+@keyframes arrowAnim-right {
+  0% {
+    transform: translateX(0);
+  }
+  15% {
+    transform: translateX(15px);
+  }
+  30% {
+    transform: translateX(0);
+  }
+  45% {
+    transform: translateX(15px);
+  }
+  60% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes arrowAnim-left {
+  0% {
+    transform: translateX(0);
+  }
+  15% {
+    transform: translateX(-15px);
+  }
+  30% {
+    transform: translateX(0);
+  }
+  45% {
+    transform: translateX(-15px);
+  }
+  60% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes arrowAnim-up {
+  0% {
+    transform: translateY(0);
+  }
+  15% {
+    transform: translateY(-15px);
+  }
+  30% {
+    transform: translateY(0);
+  }
+  45% {
+    transform: translateY(-15px);
+  }
+  60% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes arrowAnim-down {
+  0% {
+    transform: translateY(0);
+  }
+  15% {
+    transform: translateY(15px);
+  }
+  30% {
+    transform: translateY(0);
+  }
+  45% {
+    transform: translateY(15px);
+  }
+  60% {
+    transform: translateY(0);
+  }
+}

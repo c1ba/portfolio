@@ -1,7 +1,9 @@
 @use '../../app/theme/' as *;
 
 .headerGridContainer {
+  position: relative;
   width: 100%;
+  z-index: 9999;
 }
 
 .header {

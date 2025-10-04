@@ -8,7 +8,7 @@ import Icon from '@/components/Icon/Icon';
 export const generateIcons = async (html: string) => {
   const iconPlaceholders = html.matchAll(ICON_PLACEHOLDER_REGEX);
   if (!ICON_PLACEHOLDER_REGEX.test(html)) {
-    return html;
+    return [];
   }
 
   const iconsData = [...iconPlaceholders]

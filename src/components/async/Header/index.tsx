@@ -4,7 +4,11 @@ import {HeaderData} from './types';
 import {processStrapiIcon} from '@/utils/cms/processors';
 import HeaderComponent from '@/components/Header';
 
-const Header = async () => {
+type HeaderProps = {
+  url?: string;
+};
+
+const Header = async ({url}: HeaderProps) => {
   const data = await (
     await client
   ).querySinglePageProps<{header: HeaderData}>(query);
@@ -33,7 +37,7 @@ const Header = async () => {
     ),
   };
 
-  return <HeaderComponent {...processedData} />;
+  return <HeaderComponent {...processedData} revealOnPageEnter={url !== '/'} />;
 };
 
 export default Header;

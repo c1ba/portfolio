@@ -20,16 +20,23 @@ type Section = {
 type HeaderProps = {
   sections: Section[];
   socials?: Section[];
+  revealOnPageEnter?: boolean;
 };
 
-const Header = ({sections, socials}: HeaderProps) => {
+const Header = ({sections, socials, revealOnPageEnter}: HeaderProps) => {
   const scroll = useInitialScroll();
+
+  const classNames = [
+    styles.header,
+    (revealOnPageEnter || scroll) && styles.visible,
+  ]
+    .filter(Boolean)
+    .join(' ');
+
   return (
     <GridContainer className={styles.headerGridContainer}>
       <GridItem columnSpan={COLUMN_SPAN_CONFIG}>
-        <header
-          className={`${styles.header}${scroll ? ` ${styles.visible}` : ``}`}
-        >
+        <header className={classNames}>
           <IntersectorObserverWrapper threshold={1}>
             {(ref: React.RefObject<HTMLElement | null>, inView) => (
               <nav

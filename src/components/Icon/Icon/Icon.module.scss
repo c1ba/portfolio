@@ -113,3 +113,11 @@ $icon-xl: 48px;
     height: 64px;
   }
 }
+
+.flipX {
+  transform: scaleX(-1);
+}
+
+.flipY {
+  transform: scaleY(-1);
+}

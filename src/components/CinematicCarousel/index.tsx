@@ -2,12 +2,14 @@
 import GridContainer from '@/components/Grid/GridContainer';
 import GridItem from '@/components/Grid/GridItem';
 import {StrapiImage} from '@/utils/cms/types';
-import {useState} from 'react';
+import {useCallback, useState} from 'react';
 import styles from './CinematicCarousel.module.scss';
 import animations from './CarouselAnimations.module.scss';
 import ImageCard from '@/components/CinematicCard/ImageCard';
 import FakeCard from '@/components/CinematicCard/FakeCard';
 import IntersectorObserverWrapper from '@/helpers/IntersectorObserverWrapper';
+import useContentScroll from './useContentScroll';
+import Icon from '../Icon/Icon';
 
 const ANIMATION_TIME_IN_SECONDS = 0.7;
 
@@ -31,29 +33,70 @@ const CinematicCarousel = ({cards}: CinematicCardsProps) => {
     undefined,
   );
 
-  const setNextCard = (index: number) => {
-    setIsTransitioning(true);
-    setDirection(
-      index > currentCardIdx
-        ? 'Right'
-        : index < currentCardIdx
-          ? 'Left'
-          : undefined,
-    );
+  const setToCard = useCallback(
+    (index: number, direction?: 'Right' | 'Left') => {
+      if (isTransitioning) {
+        return;
+      }
+      setIsTransitioning(true);
+      setDirection(
+        direction ??
+          (index > currentCardIdx
+            ? 'Right'
+            : index < currentCardIdx
+              ? 'Left'
+              : undefined),
+      );
 
-    const transitionFinish = setTimeout(() => {
-      setIsTransitioning(false);
-      setDirection(undefined);
-      setCardIdx(index);
-      clearTimeout(transitionFinish);
-    }, TRANSITION_TIME);
-  };
+      const transitionFinish = setTimeout(() => {
+        setIsTransitioning(false);
+        setDirection(undefined);
+        setCardIdx(index);
+        clearTimeout(transitionFinish);
+      }, TRANSITION_TIME);
+    },
+    [currentCardIdx, isTransitioning],
+  );
+
+  const setNextCard = useCallback(() => {
+    setToCard(
+      currentCardIdx > 0 ? currentCardIdx - 1 : cards.length - 1,
+      'Left',
+    );
+  }, [setToCard]);
+  const setPreviousCard = useCallback(() => {
+    setToCard(
+      currentCardIdx < cards.length - 1 ? currentCardIdx + 1 : 0,
+      'Right',
+    );
+  }, [setToCard]);
+
+  const ref = useContentScroll<HTMLDivElement>((direction: 'up' | 'down') => {
+    console.log('Callback scroll direction: ', direction);
+    if (direction == 'up') {
+      setPreviousCard();
+      return;
+    }
+
+    if (direction == 'down') {
+      setNextCard();
+      return;
+    }
+  });
 
   return !cards.length ? (
     <></>
   ) : (
-    <div className={styles.carouselContainer}>
+    <div className={styles.carouselContainer} ref={ref}>
       <div className={`${styles.center}`}>
+        <div
+          className={styles.arrowPrevButtonContainer}
+          onClick={() => setNextCard()}
+        >
+          <div className={styles.arrowPrevAnim}>
+            <Icon code="chevron" label="Previous" flipX />
+          </div>
+        </div>
         <GridContainer className={styles.cardsGridContainer}>
           {/* Main Card */}
           <GridItem
@@ -241,6 +284,14 @@ const CinematicCarousel = ({cards}: CinematicCardsProps) => {
             </IntersectorObserverWrapper>
           </GridItem>
         </GridContainer>
+        <div
+          className={styles.arrowNextButtonContainer}
+          onClick={() => setPreviousCard()}
+        >
+          <div className={styles.arrowNextAnim}>
+            <Icon code="chevron" label="Next" />
+          </div>
+        </div>
       </div>
       <div className={`${styles.center} ${styles.buttonContainer}`}>
         {new Array(cards.length).fill(0).map((_, idx) => {
@@ -249,7 +300,7 @@ const CinematicCarousel = ({cards}: CinematicCardsProps) => {
               key={`btn-${idx}`}
               type="button"
               className={`${styles.cardButton}${idx === currentCardIdx ? ` ${styles.buttonActive}` : ``}`}
-              onClick={() => setNextCard(idx)}
+              onClick={() => setToCard(idx)}
             ></button>
           );
         })}

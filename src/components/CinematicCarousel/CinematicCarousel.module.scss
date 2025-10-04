@@ -102,3 +102,45 @@ $button-size: 10px;
     background-color 0.3s ease-in-out,
     border 0.3s ease-in-out;
 }
+
+@mixin arrowButtonContainer {
+  width: 125px;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 9;
+}
+
+.arrowNextButtonContainer {
+  @include arrowButtonContainer();
+  @include media-query-desktop {
+    margin-left: max(-200px, calc(-1 * 10vw));
+  }
+}
+
+.arrowNextAnim {
+  @include arrowAnim('right', 3s);
+  transition: color 0.3s ease-in-out;
+  &:hover {
+    animation-play-state: paused;
+    color: #6cd4eb;
+  }
+}
+
+.arrowPrevButtonContainer {
+  @include arrowButtonContainer();
+  @include media-query-desktop {
+    margin-right: max(-200px, calc(-1 * 10vw));
+  }
+}
+
+.arrowPrevAnim {
+  @include arrowAnim('left', 3s);
+  transition: color 0.3s ease-in-out;
+  &:hover {
+    animation-play-state: paused;
+    color: #6cd4eb;
+  }
+}

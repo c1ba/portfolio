@@ -10,7 +10,7 @@ const nextConfig: NextConfig = {
   webpack: (config, {buildId, dev, isServer, defaultLoaders, webpack}) => {
     config.resolve.alias['@'] = path.resolve(__dirname, 'src');
     config.module.rules.push({
-      test: /\.tsx$/,
+      test: /\.(tsx)$/,
       loader: './loaders/svgr.js',
     });
     return config;
