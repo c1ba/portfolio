@@ -29,7 +29,7 @@ const Page = async ({params}: PageProps<'/[...slug]'>) => {
 
   return (
     <PageWrapper url={pageUrl}>
-      <Template data={pageData} />
+      <Template data={pageData[`${pageType}s`][0]} />
     </PageWrapper>
   );
 };

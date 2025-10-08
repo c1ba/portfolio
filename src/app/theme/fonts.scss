@@ -444,7 +444,9 @@ h6 {
   @extend %k2d-bold;
 }
 
-a {
+a,
+input,
+textarea {
   @extend %k2d-medium;
 }
 

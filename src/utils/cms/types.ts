@@ -72,6 +72,55 @@ export type StrapiIcon = {
   };
 };
 
+export type FieldType =
+  | 'Text'
+  | 'Number'
+  | 'Email'
+  | 'Date'
+  | 'File'
+  | 'Textarea'
+  | 'Select'
+  | 'Radio'
+  | 'Checkbox';
+
+export type TextValidation = {
+  MinLength?: number;
+  MaxLength?: number;
+};
+
+export type NumberValidation = {
+  MoreThan?: number;
+  LessThan?: number;
+};
+
+export type DateValidation = {
+  EarlierThan?: Date;
+  LaterThan?: Date;
+};
+
+export type StrapiFormField = {
+  Label: string;
+  Type: FieldType;
+  HelpText?: string;
+  Required?: boolean;
+  RequiredErrorMessage?: string;
+  Options?: {
+    Label: string;
+    RevealOnSelect?: string;
+  }[];
+} & TextValidation &
+  NumberValidation &
+  DateValidation;
+
+export type StrapiEmailTemplate = {
+  Fields: StrapiFormField[];
+};
+
+export type StrapiEmailForm = {
+  Destination: string;
+  EmailTemplate: StrapiEmailTemplate;
+};
+
 const STRAPI_INNER_PAGES = ['about_page', 'contact_page'] as const;
 type StrapiInnerPageKey = (typeof STRAPI_INNER_PAGES)[number];
 

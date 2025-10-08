@@ -1,8 +1,8 @@
+import mapBlocks from '@/helpers/blocks';
+import {StrapiFlexibleContent} from '@/utils/cms/types';
+
 type PageProps = {
-  Hero: {
-    Heading: string;
-    Subheading?: string;
-  };
+  FlexibleContent: StrapiFlexibleContent;
 };
 
 type ContactPageProps = {
@@ -10,7 +10,8 @@ type ContactPageProps = {
 };
 
 const ContactPage = ({data}: ContactPageProps) => {
-  return <></>;
+  const {FlexibleContent} = data;
+  return <>{mapBlocks(FlexibleContent)}</>;
 };
 
 export default ContactPage;

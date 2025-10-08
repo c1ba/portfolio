@@ -1,0 +1,84 @@
+@use '../../../app/theme/' as *;
+
+$max-width: 426px;
+
+.inputContainer {
+  position: relative;
+}
+
+.input {
+  padding: 0.5rem;
+  border: 1px solid $pure-white;
+  background-color: transparent;
+  cursor: pointer;
+  @include media-query-tablet-portrait {
+    max-width: $max-width;
+  }
+
+  &:focus {
+    border-color: $sky-blue;
+    outline: none;
+    background-color: rgba(0, 123, 255, 0.25);
+  }
+
+  @include theme-light {
+    border-color: $dark-blue;
+  }
+}
+
+.list {
+  max-height: 0px;
+  background-color: $dark-blue;
+  overflow-y: auto;
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  transition: max-height 0.3s ease-in-out;
+  @include media-query-tablet-portrait {
+    max-width: $max-width;
+  }
+
+  li {
+    cursor: pointer;
+    padding: 8px 16px;
+    box-shadow: none;
+    transition: box-shadow 0.3s ease-in-out;
+
+    &:hover {
+      box-shadow:
+        inset 2px 2px $sky-blue,
+        inset -2px -2px $sky-blue;
+    }
+
+    @include theme-light {
+      background-color: $pure-white;
+    }
+  }
+
+  .searchbar {
+    width: 100%;
+    padding: 0.5rem;
+    border: none;
+    border-bottom: 1px solid $pure-white;
+    font-size: 1rem;
+    background-color: transparent;
+    box-shadow: none;
+    transition:
+      border-color 0.3s ease-in-out,
+      background-color 0.6s ease-in-out;
+
+    &:focus {
+      border-color: $sky-blue;
+      outline: none;
+      background-color: rgba(0, 123, 255, 0.25);
+    }
+
+    @include theme-light {
+      border-color: $dark-blue;
+    }
+  }
+}
+
+.listOpen {
+  max-height: 350px;
+}

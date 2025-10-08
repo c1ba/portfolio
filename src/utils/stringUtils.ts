@@ -25,3 +25,9 @@ export const dashCase = (input: string): string => {
       .replace(/^-+|-+$/g, '')
   );
 };
+
+export const camelCase = (input: string): string => {
+  return input
+    .replace(/[-_\s]+(.)?/g, (_, char) => (char ? char.toUpperCase() : '')) // remove separators and capitalize next letter
+    .replace(/^[A-Z]/, (match) => match.toLowerCase()); // lowercase first character
+};

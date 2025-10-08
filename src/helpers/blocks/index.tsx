@@ -1,4 +1,5 @@
 import CinematicCarousel from '@/blocks/CinematicCarousel';
+import EmailForm from '@/blocks/EmailForm';
 import ProjectsList from '@/blocks/ProjectsList';
 import RichText from '@/blocks/RichText';
 import {JSX} from 'react/jsx-runtime';
@@ -10,17 +11,19 @@ const MAPPING: {
   ComponentGeneralRichText: RichText,
   ComponentGeneralCinematicCarousel: CinematicCarousel,
   ComponentGeneralProjectsList: ProjectsList,
+  ComponentFormEMailForm: EmailForm,
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const mapBlocks = (blocks: ({__typename: string} & any)[]) => {
+  console.log(blocks);
   return blocks
     .map((props, index) => {
       const blockType = props.__typename;
       const Component = MAPPING[blockType];
       if (!Component) {
         console.warn(
-          `Component for ${blockType.replace('ComponentGeneral', '')} has not been found, thus the section won't be rendered`,
+          `Component for ${blockType.replace(/^Component(General|Form)/, '')} has not been found, thus the section won't be rendered`,
         );
         return undefined;
       }
