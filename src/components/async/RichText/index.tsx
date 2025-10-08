@@ -1,5 +1,6 @@
 import RichTextComponent from '@/components/RichText';
 import processHtml from './processHtml';
+import HTMLParser from '@/helpers/HTMLParser';
 
 type RichTextProps = {
   id?: string;
@@ -9,6 +10,7 @@ type RichTextProps = {
 
 const RichText = async ({id, content, className, ...props}: RichTextProps) => {
   const parsedHtml = await processHtml(content);
+  const h = new HTMLParser(content);
 
   return (
     <RichTextComponent
